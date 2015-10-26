@@ -1,0 +1,23 @@
+{
+  "name": "foto",
+  "version": "0.0.0",
+  "authors": [
+    "Leonardgrr <leonardgrr@fullsail.edu>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower",
+    "test",
+    "tests"
+  ]
+}

@@ -1,0 +1,35 @@
+<h1> Salutations world wide web! </h1>
+
+<form>
+	<label for="">
+		<input type="text" ng-model="search.text" placeholder="search here" autofocus>
+	</label>
+	<label for="">
+		<select name="" id="" ng-model="search.group">
+			<option value="name">Name</option>
+			<option value="reknown">Reknown</option>
+		</select>
+	</label>
+
+	<label for="ascending">
+		<input type="radio" ng-model="direction" name="direction" id="ascending" checked>Ascending
+	</label>
+	<label for="descending">
+		<input type="radio" ng-model="direction" name="direction" id="descending" value="reverse">Descending
+	</label>
+</form>
+
+<ul>
+	<li ng-repeat="artist in artists | filter: search.text | orderBy: search.group:direction">
+		<a>
+			<!-- <pre> {{artist | json}} </pre> -->
+			<div>
+				<h4>{{artist.name}}</h4>
+				<h5>{{artist.reknown | uppercase}}</h5>
+				<p>
+					{{artist.bio | limitTo: 140}}
+				</p>
+			</div>
+		</a>
+	</li>
+</ul>
