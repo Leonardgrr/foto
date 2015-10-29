@@ -1,5 +1,5 @@
 // angular.module('foto')
-app.controller('HomeCtrl', ["$scope", "$http", "$firebaseArray", function($scope, $http, $firebaseArray){
+app.controller('HomeCtrl', ["$mdDialog","$scope", "$http", "$firebaseArray", function($mdDialog, $scope, $http, $firebaseArray){
 	console.log("Hola Amigo")
 
 	var ref = new Firebase("https://smsfoto.firebaseio.com");
@@ -26,5 +26,30 @@ app.controller('HomeCtrl', ["$scope", "$http", "$firebaseArray", function($scope
 	// 	$scope.artists = data
 	// 	console.log($scope.artists);
 	// })
+
+
+	 $scope.showAdvanced = function(ev) {
+	 	console.log("hello there");
+	    $mdDialog.show({
+	      controller: DialogController,
+	      templateUrl: 'dialog1.tmpl.html',
+	      parent: angular.element(document.body),
+	      targetEvent: ev,
+	      clickOutsideToClose:true
+	    });
+	  };
+	  function DialogController($scope, $mdDialog) {
+		  $scope.hide = function() {
+		    $mdDialog.hide();
+		  };
+
+		  $scope.cancel = function() {
+		    $mdDialog.cancel();
+		  };
+
+		  $scope.answer = function(answer) {
+		    $mdDialog.hide(answer);
+		  };
+		}
 }]);
 
