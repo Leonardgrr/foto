@@ -1,5 +1,5 @@
-angular.module('foto')
-.controller('HomeCtrl', ["$scope", "$http", "$firebaseArray", function($scope, $http, $firebaseArray){
+// angular.module('foto')
+app.controller('HomeCtrl', ["$scope", "$http", "$firebaseArray", function($scope, $http, $firebaseArray){
 	console.log("Hola Amigo")
 
 	var ref = new Firebase("https://smsfoto.firebaseio.com");
@@ -27,3 +27,4 @@ angular.module('foto')
 	// 	console.log($scope.artists);
 	// })
 }]);
+

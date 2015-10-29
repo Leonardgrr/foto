@@ -1,3 +1,68 @@
+
+
+<md-content layout="column">
+
+	<md-content class="md-padding">
+		<md-card>
+		  <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
+			<md-toolbar md-scroll-shrink="" ng-if="true">
+				<div class="md-toolbar-tools">
+				  <h3>
+				    <span>Seattle Something</span>
+				  </h3>
+				</div>
+			</md-toolbar>
+		  <md-card-content>
+		    <h2 class="md-title">Whats the buzz?</h2>
+	<!-- COMMENTS SECTION -->
+	<md-content flex="">
+		<md-list>
+		  <md-list-item class="md-3-line" ng-repeat="artist in artists | filter: search.text | orderBy: search.group:direction">
+		    <img ng-src="{{item.face}}" alt="{{item.who}}" class="md-avatar">
+		    <div class="md-list-item-text">
+		      <h3>{{artist.author}}</h3>
+		      <h4>{{artist.body}}</h4>
+		      <p>
+		        User ID : {{artist.$id}}
+		      </p>
+		    </div>
+		    <md-divider inset=""></md-divider>
+		  </md-list-item>
+		</md-list>
+	</md-content> <!-- END COMMENTS SECTION -->
+
+<br>
+		<!-- FORM SECTION -->
+		<form ng-submit="postComment()">
+		   	<div layout="" layout-sm="column">
+		    	
+				<md-input-container flex="" >
+				  <label>What is your name?</label>
+				  <input ng-model="newComment.author">
+				</md-input-container>
+				<md-input-container flex="" >
+				  <label>Enter a comment</label>
+				  <input ng-model="newComment.body">
+				</md-input-container>
+			</div>
+
+			</md-card-content>
+				<div class="md-actions" layout="row" layout-align="end center">
+					<md-button type="submit">Submit</md-button>
+					<md-button>Action 2</md-button>
+					</form> <!-- END FORM SECTION -->
+				</div>
+			</md-card>
+
+		<section layout="row" layout-phone="column" layout-align="center center">
+		    <md-button>{{title1}}</md-button>
+		    <md-button md-no-ink class="md-primary">Primary (md-noink)</md-button>
+		    <md-button ng-disabled="isDisabled" class="md-primary">Disabled</md-button>
+		    <md-button class="md-warn" ng-click="isDisabled = !isDisabled">{{title4}}</md-button>
+		</section>
+
+
+
 <h1> Salutations world wide web! </h1>
 
 
@@ -10,10 +75,6 @@
 	</label>
 	<button type="submit">Submit</button>
 </form>
-
-
-
-
 
 <form>
 	<label for="">
@@ -36,67 +97,50 @@
 
 <ul>
 	<li ng-repeat="artist in artists | filter: search.text | orderBy: search.group:direction">
-		
-			<!-- <pre> {{artist | json}} </pre> -->
-			<div>
-				<h4>{{artist.author}}</h4>
-				<!-- <h5>{{artist.body | uppercase}}</h5> -->
-				<p>
-					{{artist.$id}}
-				</p>
-				<p>
-					{{artist.body | limitTo: 500}}
-					<!-- {{artist.body.length > 140 ? '...' : ''}} -->
-				</p>
-				<button ng-click="removeComment(artist)"> Delete Comment</button>
-			</div>
-		
+		<!-- <pre> {{artist | json}} </pre> -->
+		<div>
+			<h4>{{artist.author}}</h4>
+			<!-- <h5>{{artist.body | uppercase}}</h5> -->
+			<p>
+				{{artist.$id}}
+			</p>
+			<p>
+				{{artist.body | limitTo: 500}}
+				<!-- {{artist.body.length > 140 ? '...' : ''}} -->
+			</p>
+			<button ng-click="removeComment(artist)"> Delete Comment</button>
+			<button ng-click="editComment(artist)"> Edit Comment</button>
+		</div>
 	</li>
 </ul>
 
 
+<!-- COMMENTS SECTION -->
+<md-toolbar md-scroll-shrink="" ng-if="true" >
+    <div class="md-toolbar-tools">
+      <h3>
+        <span>Comments</span>
+      </h3>
+    </div>
+  </md-toolbar>
+
+  <md-content flex="">
+    <md-list>
+      <md-list-item class="md-3-line" ng-repeat="artist in artists | filter: search.text | orderBy: search.group:direction">
+        <img ng-src="{{item.face}}" alt="{{item.who}}" class="md-avatar">
+        <div class="md-list-item-text">
+          <h3>{{artist.author}}</h3>
+          <h4>{{artist.$id}}</h4>
+          <p>
+            {{artist.body}}
+          </p>
+        </div>
+        <md-divider inset=""></md-divider>
+      </md-list-item>
+    </md-list>
+  </md-content> <!-- END COMMENTS SECTION -->
 
 
 
-<md-content class="md-padding">
- <md-card>
-      <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
-      <md-card-content>
-        <h2 class="md-title">Seattle something</h2>
-        <p>
-          The titles of Washed Out's breakthrough song and the first single from Paracosm share the
-          two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
-        </p>
-      </md-card-content>
-      <div class="md-actions" layout="row" layout-align="end center">
-        <md-button>Action 1</md-button>
-        <md-button>Action 2</md-button>
-      </div>
-    </md-card>
 </md-content>
 
-
-
-
-
-
-
-
-<md-list ng-cloak="" class="listdemoListControls">
-  <md-subheader class="md-no-sticky">Single Action Checkboxes</md-subheader>
-  <md-list-item ng-repeat="topping in toppings">
-    <p> {{ topping.name }} </p>
-    <md-checkbox class="md-secondary" ng-model="topping.wanted"></md-checkbox>
-  </md-list-item>
-
-  <md-divider></md-divider>
-
-  <md-divider></md-divider>
-
-  <md-subheader class="md-no-sticky">Avatar with Secondary Action Icon</md-subheader>
-  <md-list-item ng-repeat="artist in artists | filter: search.text | orderBy: search.group:direction">
-    <img alt="{{ person.name }}" ng-src="{{ person.img }}" class="md-avatar">
-    <p>{{artist.author}}</p>
-    <md-icon md-svg-icon="communication:messenger" ng-click="doSecondaryAction($event)" aria-label="Open Chat" class="md-secondary md-hue-3" ng-class="{'md-primary': person.newMessage}"></md-icon>
-  </md-list-item>
-</md-list>

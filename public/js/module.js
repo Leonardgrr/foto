@@ -1,1 +1,1 @@
-angular.module('foto', ['ngRoute', 'firebase', 'ngMaterial'])
+var app = angular.module('foto', ['ngRoute', 'firebase', 'ngMaterial']);

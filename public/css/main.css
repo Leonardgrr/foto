@@ -1,5 +1,5 @@
 h1,h2,h3,h4{
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Raleway', sans-serif;
 	font-weight: 300;
 }
 
@@ -8,22 +8,7 @@ body{
 	font-weight: 400;
 }
 
-.container{
-	max-width: 900px;
-	margin: 0 auto;
-}
 
+.fabToolbardemoBasicUsage md-fab-toolbar.md-right md-fab-trigger.align-with-text {
+  left: 7px; }
 
-
-.listdemoListControls md-divider {
-  margin-top: 10px;
-  margin-bottom: 10px; }
-.listdemoListControls md-list-item > p, .listdemoListControls md-list-item > .md-list-item-inner > p, .listdemoListControls md-list-item .md-list-item-inner > p, .listdemoListControls md-list-item .md-list-item-inner > .md-list-item-inner > p {
-  -webkit-user-select: none;
-  /* Chrome all / Safari all */
-  -moz-user-select: none;
-  /* Firefox all */
-  -ms-user-select: none;
-  /* IE 10+ */
-  user-select: none;
-  /* Likely future */ }

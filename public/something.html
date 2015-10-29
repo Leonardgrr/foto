@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="foto">
+    <head>
+      <base href="/"></base>
+      <meta charset="UTF-8">
+      <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100,700,700italic' rel='stylesheet' type='text/css'>
+      <link rel="shortcut icon" href="http://iconshow.me/media/images/Mixed/line-icon/png/512/camera-512.png">
+
+      <link href='https://fonts.googleapis.com/css?family=Asap' rel='stylesheet' type='text/css'>
+      <link href='https://fonts.googleapis.com/css?family=Flamenco' rel='stylesheet' type='text/css'>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link href="css/main.css" rel="stylesheet">
+
+      <link rel="stylesheet" href="/bower/angular-material/angular-material.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+      <meta name="viewport" content="initial-scale=1" />
+
+
+      <title>foto</title>
+      
+    </head>
+    <body>
+      <md-button class="md-raised" href="/material"> Material </md-button>
+      <h1> - Outside the view - </h1>
+      <div layout="column">
+        <ng-view></ng-view>
+      </div>
+
+
+
+
+
+      <!-- angular and firebase stuff -->
+      <script src="bower/angular/angular.js"></script>
+      <script src="bower/angular-route/angular-route.js"></script>
+      <script src="bower/firebase/firebase.js"></script>
+      <script src="bower/angularfire/dist/angularfire.js"></script>
+    
+      <!-- This is angular material stuff -->
+      <script src="/bower/angular-aria/angular-aria.js"></script>
+      <script src="/bower/angular-animate/angular-animate.js"></script>
+      <script src="/bower/angular-material/angular-material.js"></script>
+
+      <!-- manual files -->
+      <script src="js/module.js"></script>
+      <script src="js/routes.js"></script>
+      <script src="js/controllers/HomeCtrl.js"></script>
+      <script src="js/controllers/MaterialCtrl.js"></script>
+
+    </body>
+</html>
