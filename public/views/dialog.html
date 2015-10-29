@@ -1,0 +1,39 @@
+<md-dialog aria-label="Edit Comment"  ng-cloak>
+  <form>
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>Edit Comment</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="cancel()">
+      	<md-icon  aria-label="Close dialog" class="material-icons">close</md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content >
+    <div class="md-dialog-content">
+
+
+
+		<md-input-container flex="">
+		  <label>First name</label>
+		  <input ng-model="editComment.author" ng-change="artist.$save(artist.author)">
+		</md-input-container>
+		<md-input-container flex="">
+			<label>Current Comment</label>
+			<textarea ng-model="editComment.body" columns="1" md-maxlength="150"></textarea>
+		</md-input-container>
+
+
+
+      <!-- <h2>{{editComment.author}}</h2> -->
+
+    </div>
+  </md-dialog-content>
+
+  <div class="md-actions" layout="row">
+    <md-button ng-click="answer()" >
+     submit changes
+    </md-button>
+  </div>
+  </form>
+</md-dialog>

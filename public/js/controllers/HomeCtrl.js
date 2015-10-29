@@ -28,17 +28,37 @@ app.controller('HomeCtrl', ["$mdDialog","$scope", "$http", "$firebaseArray", fun
 	// })
 
 
-	 $scope.showAdvanced = function(ev) {
-	 	console.log("hello there");
+	 $scope.showAdvanced = function(ev, artist, index) {
+	 	$scope.editComment = artist;
+	 	console.log('shitface',$scope.editComment.author);
+	 	$scope.editCommentIndex = index;
+	 	// console.log(artist);
+	 	// console.log('comment'+ $scope.editComment.author);
+	 	// console.log('index'+ $scope.editCommentIndex);
 	    $mdDialog.show({
 	      controller: DialogController,
-	      templateUrl: 'dialog1.tmpl.html',
+	      templateUrl: './views/dialog.html',
 	      parent: angular.element(document.body),
 	      targetEvent: ev,
-	      clickOutsideToClose:true
+	      clickOutsideToClose:true,
+	      resolve:{
+	      	artist:function(){
+	      		return $scope.editComment;
+	      	},
+	      	index: function(){
+	      		return $scope.editCommentIndex;
+	      	}
+	      }
 	    });
 	  };
-	  function DialogController($scope, $mdDialog) {
+	  function DialogController($scope, $mdDialog, artist, index) {
+	  	var ref = new Firebase("https://smsfoto.firebaseio.com");
+		$scope.artists = $firebaseArray(ref);
+
+	  	// console.log(artist);
+	  	$scope.editComment = artist;
+		$scope.editCommentIndex = index;
+
 		  $scope.hide = function() {
 		    $mdDialog.hide();
 		  };
@@ -47,9 +67,14 @@ app.controller('HomeCtrl', ["$mdDialog","$scope", "$http", "$firebaseArray", fun
 		    $mdDialog.cancel();
 		  };
 
-		  $scope.answer = function(answer) {
-		    $mdDialog.hide(answer);
+		  $scope.answer = function() {
+			console.log($scope.editCommentIndex);
+
+		  	$scope.artists[$scope.editCommentIndex] = $scope.editComment;
+		  	$scope.artists.$save($scope.editCommentIndex).then(function(ref){});
+		    $mdDialog.hide();
 		  };
 		}
+
 }]);
 
