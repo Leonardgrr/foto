@@ -1,7 +1,4 @@
-
-
 <md-content layout="column">
-
 	<md-content class="md-padding">
 		<md-card>
 		  <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
@@ -15,31 +12,30 @@
 		  <md-card-content>
 		    <h2 class="md-title">Whats the buzz?</h2>
 
-<!-- COMMENTS SECTION -->
-  <md-content flex="">
-    <md-list>
-      <md-list-item class="md-3-line" ng-repeat="artist in artists | filter: search.text | orderBy: search.group:direction">
-        <img ng-src="{{item.face}}" alt="{{item.who}}" class="md-avatar">
-        <div class="md-list-item-text">
-          <h3>{{artist.author}}</h3>
-          <h4>{{artist.$id}}</h4>
-          <p>
-            {{artist.body}}
-          </p>
-          <md-button ng-click="showAdvanced($event, artist, $index)" class="md-primary" >Edit comment </md-button>
-          <md-button class="md-warn" ng-click="removeComment(artist)" >Delete comment </md-button>
-        </div>
-      </md-list-item>
-    </md-list>
-  </md-content> <!-- END COMMENTS SECTION -->
-
-<br>
+		<!-- COMMENTS SECTION -->
+		  <md-content flex="">
+		    <md-list>
+		      <md-list-item class="md-3-line" ng-repeat="user in users | filter: search.text | orderBy: search.group:direction">
+		        <img ng-src="{{thumbPath}}" alt="{{item.who}}" class="md-avatar">
+		        <div class="md-list-item-text">
+		          <h3>{{user.author}}</h3>
+		          <h4>{{user.$id}}</h4>
+		          <p>
+		            {{user.body}}
+		          </p>
+		          <md-button ng-click="showAdvanced($event, user, $index)" class="md-primary" >Edit comment </md-button>
+		          <md-button class="md-warn" ng-click="removeComment(user)" >Delete comment </md-button>
+		        </div>
+		      </md-list-item>
+		    </md-list>
+		  </md-content> <!-- END COMMENTS SECTION -->
+		<br>
 		<!-- FORM SECTION -->
 		<form ng-submit="postComment()">
 		   	<div layout="" layout-sm="column">
 		    	
 				<md-input-container flex="" >
-				  <label>What is your name?</label>
+				  <label>Username</label>
 				  <input ng-model="newComment.author">
 				</md-input-container>
 				<md-input-container flex="" >
@@ -50,18 +46,11 @@
 
 			</md-card-content>
 				<div class="md-actions" layout="row" layout-align="end center">
-					<md-button type="submit">Submit</md-button>
-					<md-button>Action 2</md-button>
+					<md-button type="submit">Submit<md-icon class="material-icons">send</md-icon></md-button>
 					</form> <!-- END FORM SECTION -->
 				</div>
 		</md-card>
 
-<md-button class="md-primary md-raised" ng-click="showAdvanced($event)" flex-sm="100" flex-md="100" flex-gt-md="auto">
-      Custom Dialog
-    </md-button>
-<!-- DIALOG BOX  -->
-
-<!-- END DIALOG BOX -->
 
 <h1> Salutations world wide web! </h1>
 
@@ -95,52 +84,8 @@
 	</label>
 </form>
 
-<ul>
-	<li ng-repeat="artist in artists | filter: search.text | orderBy: search.group:direction">
-		<!-- <pre> {{artist | json}} </pre> -->
-		<div>
-			<h4>{{artist.author}}</h4>
-			<!-- <h5>{{artist.body | uppercase}}</h5> -->
-			<p>
-				{{artist.$id}}
-			</p>
-			<p>
-				{{artist.body | limitTo: 500}}
-				<!-- {{artist.body.length > 140 ? '...' : ''}} -->
-			</p>
-			<button ng-click="removeComment(artist)"> Delete Comment</button>
-			<button ng-click="editComment(artist)"> Edit Comment</button>
-		</div>
-	</li>
-</ul>
 
 
-<!-- COMMENTS SECTION -->
-<md-toolbar md-scroll-shrink="" ng-if="true" >
-    <div class="md-toolbar-tools">
-      <h3>
-        <span>Comments</span>
-      </h3>
-    </div>
-  </md-toolbar>
-
-  <md-content flex="">
-    <md-list>
-      <md-list-item class="md-3-line" ng-repeat="artist in artists | filter: search.text | orderBy: search.group:direction">
-        <img ng-src="{{item.face}}" alt="{{item.who}}" class="md-avatar">
-        <div class="md-list-item-text">
-          <h3>{{artist.author}}</h3>
-          <h4>{{artist.$id}}</h4>
-          <p>
-            {{artist.body}}
-          </p>
-          <md-button ng-click="showAdvanced($event)" class="md-primary" >Edit comment </md-button>
-          <md-button class="md-primary" ng-click="removeComment(artist)" >Delete comment </md-button>
-        </div>
-        <md-divider inset=""></md-divider>
-      </md-list-item>
-    </md-list>
-  </md-content> <!-- END COMMENTS SECTION -->
 
 
 </md-content>

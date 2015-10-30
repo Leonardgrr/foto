@@ -3,36 +3,37 @@ app.controller('HomeCtrl', ["$mdDialog","$scope", "$http", "$firebaseArray", fun
 	console.log("Hola Amigo")
 
 	var ref = new Firebase("https://smsfoto.firebaseio.com");
-	$scope.artists = $firebaseArray(ref);
+	$scope.users = $firebaseArray(ref);
 
 	$scope.postComment = function(){
-		$scope.artists.$add({
+		$scope.users.$add({
 			author : $scope.newComment.author,
 			body: $scope.newComment.body
 		})
 	}
 
 	$scope.removeComment = function(obj){
-		$scope.artists.$remove(obj).then(function(ref){
+		$scope.users.$remove(obj).then(function(ref){
 			ref.key() === obj.$id; // true
 		})
 	}
 
-	$scope.imagePath = 'imgs/mountain.jpg';
+	$scope.imagePath = 'imgs/tall.jpg';
+	$scope.thumbPath = 'imgs/thumb.png';
 
 
 	// get the local json object
 	// $http.get('js/data.json').success(function(data){
-	// 	$scope.artists = data
-	// 	console.log($scope.artists);
+	// 	$scope.users = data
+	// 	console.log($scope.users);
 	// })
 
 
-	 $scope.showAdvanced = function(ev, artist, index) {
-	 	$scope.editComment = artist;
+	 $scope.showAdvanced = function(ev, user, index) {
+	 	$scope.editComment = user;
 	 	console.log('shitface',$scope.editComment.author);
 	 	$scope.editCommentIndex = index;
-	 	// console.log(artist);
+	 	// console.log(user);
 	 	// console.log('comment'+ $scope.editComment.author);
 	 	// console.log('index'+ $scope.editCommentIndex);
 	    $mdDialog.show({
@@ -42,7 +43,7 @@ app.controller('HomeCtrl', ["$mdDialog","$scope", "$http", "$firebaseArray", fun
 	      targetEvent: ev,
 	      clickOutsideToClose:true,
 	      resolve:{
-	      	artist:function(){
+	      	user:function(){
 	      		return $scope.editComment;
 	      	},
 	      	index: function(){
@@ -51,12 +52,12 @@ app.controller('HomeCtrl', ["$mdDialog","$scope", "$http", "$firebaseArray", fun
 	      }
 	    });
 	  };
-	  function DialogController($scope, $mdDialog, artist, index) {
+	  function DialogController($scope, $mdDialog, user, index) {
 	  	var ref = new Firebase("https://smsfoto.firebaseio.com");
-		$scope.artists = $firebaseArray(ref);
+		$scope.users = $firebaseArray(ref);
 
-	  	// console.log(artist);
-	  	$scope.editComment = artist;
+	  	// console.log(user);
+	  	$scope.editComment = user;
 		$scope.editCommentIndex = index;
 
 		  $scope.hide = function() {
@@ -70,8 +71,8 @@ app.controller('HomeCtrl', ["$mdDialog","$scope", "$http", "$firebaseArray", fun
 		  $scope.answer = function() {
 			console.log($scope.editCommentIndex);
 
-		  	$scope.artists[$scope.editCommentIndex] = $scope.editComment;
-		  	$scope.artists.$save($scope.editCommentIndex).then(function(ref){});
+		  	$scope.users[$scope.editCommentIndex] = $scope.editComment;
+		  	$scope.users.$save($scope.editCommentIndex).then(function(ref){});
 		    $mdDialog.hide();
 		  };
 		}
