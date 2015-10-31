@@ -28,7 +28,7 @@ app.controller('HomeCtrl', ["$mdDialog","$scope", "$http", "$firebaseArray", fun
 	// 	console.log($scope.users);
 	// })
 
-
+	// EDIT COMMENT DIALOG CONTROLLERS
 	 $scope.showAdvanced = function(ev, user, index) {
 	 	$scope.editComment = user;
 	 	console.log('shitface',$scope.editComment.author);

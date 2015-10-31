@@ -13,7 +13,7 @@
       <link rel="stylesheet" href="/bower/angular-material/angular-material.css">
       <link href="css/main.css" rel="stylesheet">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
-      
+      <meta name="theme-color" content="#3F51B5">
       <meta name="viewport" content="width=device-width">
 
 
@@ -21,13 +21,14 @@
       
     </head>
     <body layout="column">
+
     <!-- MAIN TOOLBAR -->
       <div ng-cloak>
         <md-content>
          <md-toolbar>
           <div class="md-toolbar-tools">
-            <md-button class="md-icon-button" aria-label="Menu">
-              <md-icon class="material-icons">menu</md-icon>
+            <md-button class="md-icon-button" aria-label="home" ng-href="/">
+              <md-icon class="material-icons">home</md-icon>
             </md-button>
             <h2>
               <span>Snappy snap snap</span>
@@ -36,8 +37,8 @@
             <md-button class="md-icon-button" aria-label="Favorite">
               <md-icon class="material-icons" >favorite</md-icon>
             </md-button>
-            <md-button class="md-icon-button" aria-label="More">
-              <md-icon class="material-icons">more_vert</md-icon>
+            <md-button class="md-icon-button" aria-label="Sign In" ng-click="showAdvanced($event, user, $index)">
+              <md-icon class="material-icons">account_circle</md-icon>
             </md-button>
           </div>
           </md-toolbar>
@@ -87,6 +88,7 @@
       <script src="js/module.js"></script>
       <script src="js/routes.js"></script>
       <script src="js/controllers/HomeCtrl.js"></script>
+      <script src="js/controllers/LoginCtrl.js"></script>
       <script src="js/controllers/MaterialCtrl.js"></script>
 
     </body>

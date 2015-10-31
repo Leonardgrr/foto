@@ -1,0 +1,22 @@
+
+<!--     <section layout="row" layout-sm="column" layout-align="center center" layout-wrap="">
+      <md-button>Explore</md-button>
+      <md-button md-no-ink="" class="md-primary">Primary (md-noink)</md-button>
+      <md-button ng-disabled="true" class="md-primary">Disabled</md-button>
+      <md-button class="md-warn">Warning</md-button>
+    </section> -->
+
+
+
+    <section layout="row" layout-sm="column" layout-align="center center" layout-wrap="">
+      <!-- <md-button class="md-raised">Button</md-button> -->
+      <md-button class="md-raised md-primary" ng-click="loginDialog($event, user, $index)">Login</md-button>
+      <md-button class="md-raised md-primary" ng-click="login()">Login with github</md-button>
+      <md-button class="md-raised md-warn" ng-click="logout()" >LogOut</md-button>
+      <md-button class="md-raised md-accent" ng-href="explore">explore</md-button>
+      <!-- <md-button class="md-raised md-warn">Warn</md-button>
+      <div class="label">Raised</div> -->
+
+
+    </section>
+<h2>{{userData}}</h2>

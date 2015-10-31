@@ -1,0 +1,91 @@
+<md-content layout="column">
+	<md-content class="md-padding">
+		<md-card>
+		  <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
+			<md-toolbar md-scroll-shrink="" ng-if="true">
+				<div class="md-toolbar-tools">
+				  <h3>
+				    <span>Seattle Something</span>
+				  </h3>
+				</div>
+			</md-toolbar>
+		  <md-card-content>
+		    <h2 class="md-title">Whats the buzz?</h2>
+
+		<!-- COMMENTS SECTION -->
+		  <md-content flex="">
+		    <md-list>
+		      <md-list-item class="md-3-line" ng-repeat="user in users | filter: search.text | orderBy: search.group:direction">
+		        <img ng-src="{{thumbPath}}" alt="{{item.who}}" class="md-avatar">
+		        <div class="md-list-item-text">
+		          <h3>{{user.author}}</h3>
+		          <h4>{{user.$id}}</h4>
+		          <p>
+		            {{user.body}}
+		          </p>
+		          <md-button ng-click="showAdvanced($event, user, $index)" class="md-primary" >Edit comment </md-button>
+		          <md-button class="md-warn" ng-click="removeComment(user)" >Delete comment </md-button>
+		        </div>
+		      </md-list-item>
+		    </md-list>
+		  </md-content> <!-- END COMMENTS SECTION -->
+		<br>
+		<!-- FORM SECTION -->
+		<form ng-submit="postComment()">
+		   	<div layout="" layout-sm="column">
+		    	
+				<md-input-container flex="" >
+				  <label>Username</label>
+				  <input ng-model="newComment.author">
+				</md-input-container>
+				<md-input-container flex="" >
+				  <label>Enter a comment</label>
+				  <input ng-model="newComment.body">
+				</md-input-container>
+			</div>
+
+			</md-card-content>
+				<div class="md-actions" layout="row" layout-align="end center">
+					<md-button type="submit">
+						<md-icon class="material-icons">send</md-icon>
+						<md-tooltip>Submit</md-tooltip>
+					</md-button>
+					</form> <!-- END FORM SECTION -->
+				</div>
+		</md-card>
+
+
+<h1> Salutations world wide web! </h1>
+
+
+<form ng-submit="postComment()">
+	<label for="">
+		<input type="text" ng-model="newComment.author" placeholder="Your Name" autofocus>
+	</label>
+	<label for="">
+		<textarea name="" ng-model="newComment.body">New Comment</textarea>
+	</label>
+	<button type="submit">Submit</button>
+</form>
+
+<form>
+	<label for="">
+		<input type="text" ng-model="search.text" placeholder="search here" autofocus>
+	</label>
+	<label for="">
+		<select name="" id="" ng-model="search.group">
+			<option value="name">Name</option>
+			<option value="reknown">Reknown</option>
+		</select>
+	</label>
+
+	<label for="ascending">
+		<input type="radio" ng-model="direction" name="direction" id="ascending" checked>Ascending
+	</label>
+	<label for="descending">
+		<input type="radio" ng-model="direction" name="direction" id="descending" value="reverse">Descending
+	</label>
+</form>
+
+</md-content>
+
