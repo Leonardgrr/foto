@@ -38,8 +38,32 @@ app.controller('LoginCtrl', ["$mdDialog", "$scope", "$http", "$firebaseArray", "
 			$scope.authObj.$authWithOAuthPopup("google").then(function(authData) {
 			  console.log("Logged in as:", authData.uid);
 			  console.log(authData);
-			  console.log(authData.google.displayName);
-			  $scope.userData = authData.google.displayName;
+			  console.log(authData.google.profileImageURL);
+			  $scope.userData = authData;
+			}).catch(function(error) {
+			  console.error("Authentication failed:", error);
+			})
+		}
+
+		$scope.loginFacebook = function(){
+			console.log("login dialog is here")
+			$scope.authObj.$authWithOAuthPopup("facebook").then(function(authData) {
+			  console.log("Logged in as:", authData.uid);
+			  console.log(authData.facebook.displayName);
+			  console.log(authData.facebook.profileImageURL);
+			  $scope.userData = authData;
+			}).catch(function(error) {
+			  console.error("Authentication failed:", error);
+			})
+		}
+
+		$scope.loginTwitter = function(){
+			console.log("login dialog is here")
+			$scope.authObj.$authWithOAuthPopup("twitter").then(function(authData) {
+			  console.log("Logged in as:", authData.uid);
+			  console.log(authData.twitter.displayName);
+			  console.log(authData.twitter.profileImageURL);
+			  $scope.userData = authData;
 			}).catch(function(error) {
 			  console.error("Authentication failed:", error);
 			})

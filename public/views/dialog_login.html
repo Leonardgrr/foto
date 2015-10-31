@@ -16,13 +16,21 @@
 
       <section layout="row" layout-sm="column" layout-align="center center" layout-wrap="">
         <md-button style="color: #D50F25;" ng-click="login()">Google+</md-button>
-        <md-button style="color: #3b5998;">facebook</md-button>
-        <md-button style="color: #55acee;">twitter</md-button>
+        <md-button style="color: #3b5998;" ng-click="loginFacebook()">facebook</md-button>
+        <md-button style="color: #55acee;" ng-click="loginTwitter()">twitter</md-button>
       </section>
+
+      <h2>{{userData.facebook.displayName}}</h2>
+      <img src= "{{userData.facebook.profileImageURL}}">
+      <h2>{{userData.google.displayName}}</h2>
+      <img src= "{{userData.google.profileImageURL}}">
+      <h2>{{userData.twitter.displayName}}</h2>
+      <img src= "{{userData.twitter.profileImageURL}}">
+
 
 
     </div>
   </form>
 
-  <h2>Welcome back, {{userData}}</h2>
+
 </md-dialog>
