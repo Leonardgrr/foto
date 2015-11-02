@@ -1,9 +1,23 @@
 // angular.module('foto')
-app.controller('HomeCtrl', ["$mdDialog","$scope", "$http", "$firebaseArray", function($mdDialog, $scope, $http, $firebaseArray){
+app.controller('HomeCtrl', ["$mdDialog","$scope", "$http", "$firebaseArray", "$firebaseAuth", function($mdDialog, $scope, $http, $firebaseArray, $firebaseAuth){
 	console.log("Hola Amigo")
 
 	var ref = new Firebase("https://smsfoto.firebaseio.com");
 	$scope.users = $firebaseArray(ref);
+
+	$scope.authObj = $firebaseAuth(ref);
+	$scope.logout = function(){
+		$scope.authObj.$unauth();
+	}
+
+	$scope.authObj.$onAuth(function(authData) {
+	  if (authData) {
+	  	$scope.userData = authData;
+	    console.log("Logged in as:", authData.google.displayName);
+	  } else {
+	    console.log("Logged out");
+	  }
+	});
 
 	$scope.postComment = function(){
 		$scope.users.$add({

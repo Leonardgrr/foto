@@ -10,13 +10,38 @@
 
     <section layout="row" layout-sm="column" layout-align="center center" layout-wrap="">
       <!-- <md-button class="md-raised">Button</md-button> -->
-      <md-button class="md-raised md-primary" ng-click="loginDialog($event, user, $index)">Login</md-button>
-      <md-button class="md-raised md-primary" ng-click="login()">Login with github</md-button>
-      <md-button class="md-raised md-warn" ng-click="logout()" >LogOut</md-button>
-      <md-button class="md-raised md-accent" ng-href="explore">explore</md-button>
+<!--       <md-button class="md-raised md-primary" ng-click="loginDialog($event, user, $index)">Login</md-button>
+      <md-button class="md-raised md-primary" ng-click="login()">Login with github</md-button> -->
+      <md-button class="md-raised md-warn" ng-click="logout()" ng-show="userData">LogOut</md-button>
+      <md-button class="md-raised md-accent" ng-show="userData" ng-href="explore">explore</md-button>
       <!-- <md-button class="md-raised md-warn">Warn</md-button>
       <div class="label">Raised</div> -->
 
 
     </section>
-<h2>{{userData}}</h2>
+
+  <div layout="column" layout-align="center center">
+    <h2>Login with your social account :</h2>
+      
+      <section layout="row" layout-sm="column" layout-align="center center" layout-wrap="">
+        <md-button ng-hide="userData" style="color: #D50F25;" ng-href="account" ng-click="login()">Google+</md-button>
+        <md-button ng-hide="userData" style="color: #3b5998;" ng-href="account" ng-click="loginFacebook()">facebook</md-button>
+        <md-button ng-hide="userData" style="color: #55acee;" ng-href="account" ng-click="loginTwitter()">twitter</md-button>
+      </section>
+
+  <div ng-show="userData" layout="column" layout-align="center center">
+    <h2>{{userData.facebook.displayName}}</h2>
+    <img src= "{{userData.facebook.profileImageURL}}">
+    <h2>{{userData.google.displayName}}</h2>
+    <img src= "{{userData.google.profileImageURL}}">
+    <h2>{{userData.twitter.displayName}}</h2>
+    <img src= "{{userData.twitter.profileImageURL}}">
+
+    <pre>{{userData}}</pre>  
+
+  </div>
+
+  </div>
+
+
+
