@@ -1,14 +1,42 @@
-app.controller('LoginCtrl', ["$mdDialog", "$scope", "$http", "$firebaseArray", "$firebaseAuth",
-	function($mdDialog, $scope, $http, $firebaseArray, $firebaseAuth, user, Auth){
+app.controller('LoginCtrl', ["$mdDialog", "$scope", "$http", "$firebaseArray", "$firebaseAuth", "$firebaseObject", 
+	function($mdDialog, $scope, $http, $firebaseArray, $firebaseAuth, $firebaseObject, user, Auth){
 	var ref = new Firebase("https://smsfoto.firebaseio.com");
 	$scope.authObj = $firebaseAuth(ref);
+	$scope.users = $firebaseObject(new Firebase("https://smsfoto.firebaseio.com/users/"));
+
+	// $scope.authObj.$onAuth(function(authData) {
+	//   if (authData) {
+	//   	$scope.userData = authData;
+	//     console.log("Logged in as:", authData.google.displayName);
+	//   } else {
+	//     // console.log("Logged out");
+	//   }
+	// });
 
 	$scope.authObj.$onAuth(function(authData) {
 	  if (authData) {
 	  	$scope.userData = authData;
-	    console.log("Logged in as:", authData.google.displayName);
+	  	var user = $firebaseObject(new Firebase("https://smsfoto.firebaseio.com/users/"+authData.uid));
+
+	  	if (authData.provider === "google"){
+		  	user.profilePic = authData.google.profileImageURL;
+		  	user.userName = authData.google.displayName;
+		  	user.$save();
+	  	}else if (authData.provider === "twitter"){
+	  		user.profilePic = authData.twitter.profileImageURL;
+		  	user.userName = authData.twitter.displayName;
+		  	user.$save();
+	  	}else if (authData.provider === "facebook"){
+	  		user.profilePic = authData.facebook.profileImageURL;
+		  	user.userName = authData.facebook.displayName;
+		  	user.$save();	
+	  	}
+	  	// user.profilePic = authData.google.profileImageURL;
+	  	// user.userName = authData.google.displayName;
+	  	// user.$save();
+	    // console.log("Logged in as:", authData.google.displayName);
 	  } else {
-	    console.log("Logged out");
+	    // console.log("Logged out");
 	  }
 	});
 
@@ -48,6 +76,7 @@ app.controller('LoginCtrl', ["$mdDialog", "$scope", "$http", "$firebaseArray", "
 	}
 
 	$scope.logout = function(){
+		console.log("did i log out?");
 		$scope.authObj.$unauth();
 	}
 

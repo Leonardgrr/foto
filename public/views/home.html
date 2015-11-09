@@ -35,7 +35,8 @@
 		      <md-list-item class="md-3-line" ng-repeat="comment in comments | filter: search.text | orderBy: search.group:direction">
 		        <img ng-src="{{users[comment.userId].profilePic}}" alt="{{item.who}}" class="md-avatar">
 		        <div class="md-list-item-text">
-		          <h3>{{comment.userId}}</h3>
+		        	<h3>{{users[comment.userId].userName}}</h3>
+		          <!-- <h3>{{comment.userId}}</h3> -->
 		          <h4>{{comment.$id}}</h4>
 		          <p>
 		            {{comment.body}}
@@ -48,16 +49,11 @@
 		  </md-content> <!-- END COMMENTS SECTION -->
 		<br>
 		<!-- FORM SECTION -->
-		<form ng-submit="postComment()">
+		<form ng-submit="userPostComment()">
 		   	<div layout="" layout-sm="column">
-		    	
-				<md-input-container flex="" >
-				  <label>Username</label>
-				  <input ng-model="newComment.author">
-				</md-input-container>
 				<md-input-container flex="" >
 				  <label>Enter a comment</label>
-				  <input ng-model="newComment.body">
+				  <textarea name="" ng-model="newComment.userSays">New Comment</textarea>
 				</md-input-container>
 			</div>
 
@@ -72,9 +68,7 @@
 		</md-card>
 
 
-<h1> Salutations world wide web! </h1>
-
-
+<!-- <h1> old comment form</h1>
 <form ng-submit="userPostComment()">
 	<label for="">
 		<input type="hidden" ng-model="newComment.user" placeholder="{{userData.google.displayName}}" value="{{userData.google.displayName}}" autofocus>
@@ -102,7 +96,7 @@
 	<label for="descending">
 		<input type="radio" ng-model="direction" name="direction" id="descending" value="reverse">Descending
 	</label>
-</form>
+</form> -->
 
 </md-content>
 

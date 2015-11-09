@@ -12,23 +12,31 @@ app.controller('HomeCtrl', ["$mdDialog","$scope", "$http", "$firebaseArray", "$f
 	$scope.userFotos = $firebaseArray(ref);
 
 	$scope.authObj = $firebaseAuth(ref);
-	$scope.logout = function(){
-		$scope.authObj.$unauth();
-	}
+	// $scope.logout = function(){
+	// 	$scope.authObj.$unauth();
+	// }
 
 	$scope.authObj.$onAuth(function(authData) {
 	  if (authData) {
 	  	$scope.userData = authData;
 	  	var user = $firebaseObject(new Firebase("https://smsfoto.firebaseio.com/users/"+authData.uid));
-
-	  	user.profilePic = authData.google.profileImageURL;
-	  	user.userName = authData.google.displayName;
-	  	user.$save();
-	    console.log("Logged in as:", authData.google.displayName);
-	  } else {
-	    console.log("Logged out");
-	  }
+	  } 
 	});
+
+
+	// $scope.authObj.$onAuth(function(authData) {
+	//   if (authData) {
+	//   	$scope.userData = authData;
+	//   	var user = $firebaseObject(new Firebase("https://smsfoto.firebaseio.com/users/"+authData.uid));
+
+	//   	user.profilePic = authData.google.profileImageURL;
+	//   	user.userName = authData.google.displayName;
+	//   	user.$save();
+	//     // console.log("Logged in as:", authData.google.displayName);
+	//   } else {
+	//     // console.log("Logged out");
+	//   }
+	// });
 
 	// COMMENT CRUD
 	$scope.postComment = function(){
@@ -43,10 +51,12 @@ app.controller('HomeCtrl', ["$mdDialog","$scope", "$http", "$firebaseArray", "$f
 			ref.key() === obj.$id; // true
 		})
 	}
-
+	
+	console.log($scope.userData);
 	// USER COMMENT CRUD
 	$scope.userPostComment = function(){
 		console.log("new comment was posted");
+
 		$scope.comments.$add({
 			userId : $scope.userData.uid,
 			body: $scope.newComment.userSays
@@ -94,7 +104,7 @@ app.controller('HomeCtrl', ["$mdDialog","$scope", "$http", "$firebaseArray", "$f
 	    });
 	  };
 
-	  // COMMENT FUNCTIONS
+	  // COMMENT DIALOG FUNCTIONS
 	  function DialogController($scope, $mdDialog, user, index) {
 	  	var ref = new Firebase("https://smsfoto.firebaseio.com");
 		// $scope.users = $firebaseArray(ref);

@@ -19,6 +19,6 @@ app.config(function($routeProvider,$locationProvider) {
 	})
 	.when('/account', {
 		templateUrl: 'views/user.html',
-		controller: 'HomeCtrl'
+		controller: 'LoginCtrl'
 	})
 });
