@@ -1,7 +1,26 @@
 
 <div ng-show="userData" layout="column" layout-align="center center">
+<div id="spin"></div>
+
+<h1>Upload a picture</h1>
+<input class="hidden" type="file" accept="image/*" capture="camera" id="file-upload">
+<br/>
+<!-- <img class="pano" id="pano" /> -->
+<img src= "{{picture}}">
+
+
+<div>
+	
+
+</div>
+
+
 	<md-button class="md-raised md-warn" ng-href="/" ng-click="logout()" ng-show="userData">LogOut</md-button>
     <md-button class="md-raised md-accent" ng-show="userData" ng-href="explore">explore</md-button>
+
+<!-- 	<input id="fileInput" name="file" type="file" multiple>
+	<md-button id="uploadButton" class="md-raised md-primary"> Choose Files </md-button>
+ -->
 
 	<h2>Weclome back</h2>
 	<h2>{{userData.facebook.displayName}}</h2>
@@ -11,5 +30,9 @@
 	<h2>{{userData.twitter.displayName}}</h2>
 	<img src= "{{userData.twitter.profileImageURL}}">
 
+
+
 	<pre>{{userData}}</pre>  
+
+
 </div>

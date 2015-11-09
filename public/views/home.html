@@ -10,18 +10,35 @@
 				</div>
 			</md-toolbar>
 		  <md-card-content>
-		    <h2 class="md-title">Whats the buzz?</h2>
+		    <h2 class="md-title">Comments go HERE</h2>
 
 		<!-- COMMENTS SECTION -->
-		  <md-content flex="">
+<!-- 		  <md-content flex="">
 		    <md-list>
 		      <md-list-item class="md-3-line" ng-repeat="user in users | filter: search.text | orderBy: search.group:direction">
-		        <img ng-src="{{thumbPath}}" alt="{{item.who}}" class="md-avatar">
+		        <img ng-src="{{userData.google.profileImageURL}}" alt="{{item.who}}" class="md-avatar">
 		        <div class="md-list-item-text">
-		          <h3>{{user.author}}</h3>
+		          <h3>{{user.user.google.displayName}}</h3>
 		          <h4>{{user.$id}}</h4>
 		          <p>
 		            {{user.body}}
+		          </p>
+		          <md-button ng-click="showAdvanced($event, user, $index)" class="md-primary" >Edit comment </md-button>
+		          <md-button class="md-warn" ng-click="removeComment(user)" >Delete comment </md-button>
+		        </div>
+		      </md-list-item>
+		    </md-list>
+		  </md-content> END COMMENTS SECTION -->
+		  		<!-- COMMENTS SECTION -->
+		  <md-content flex="">
+		    <md-list>
+		      <md-list-item class="md-3-line" ng-repeat="comment in comments | filter: search.text | orderBy: search.group:direction">
+		        <img ng-src="{{users[comment.userId].profilePic}}" alt="{{item.who}}" class="md-avatar">
+		        <div class="md-list-item-text">
+		          <h3>{{comment.userId}}</h3>
+		          <h4>{{comment.$id}}</h4>
+		          <p>
+		            {{comment.body}}
 		          </p>
 		          <md-button ng-click="showAdvanced($event, user, $index)" class="md-primary" >Edit comment </md-button>
 		          <md-button class="md-warn" ng-click="removeComment(user)" >Delete comment </md-button>
@@ -58,12 +75,12 @@
 <h1> Salutations world wide web! </h1>
 
 
-<form ng-submit="postComment()">
+<form ng-submit="userPostComment()">
 	<label for="">
-		<input type="text" ng-model="newComment.author" placeholder="Your Name" autofocus>
+		<input type="hidden" ng-model="newComment.user" placeholder="{{userData.google.displayName}}" value="{{userData.google.displayName}}" autofocus>
 	</label>
 	<label for="">
-		<textarea name="" ng-model="newComment.body">New Comment</textarea>
+		<textarea name="" ng-model="newComment.userSays">New Comment</textarea>
 	</label>
 	<button type="submit">Submit</button>
 </form>
