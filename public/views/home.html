@@ -42,7 +42,7 @@
 		          <p>
 		            {{comment.body}}
 		          </p>
-		          <md-button ng-click="showAdvanced($event, user, $index)" class="md-primary" ng-show="currentUser === comment.userId ">Edit comment </md-button>
+		          <md-button ng-click="showAdvanced($event, comment, $index)" class="md-primary" ng-show="currentUser === comment.userId ">Edit comment </md-button>
 		          <md-button class="md-warn" ng-click="userRemoveComment(comment)" ng-show="currentUser === comment.userId ">Delete comment </md-button>
 		        </div>
 		      </md-list-item>
@@ -54,7 +54,7 @@
 		   	<div layout="" layout-sm="column">
 				<md-input-container flex="" >
 				  <label>Enter a comment</label>
-				  <textarea name="" ng-model="newComment.userSays">New Comment</textarea>
+				  <textarea name="" ng-model="newComment.userSays" ng-keydown="$event.which === 13 && userPostComment()">New Comment</textarea>
 				</md-input-container>
 			</div>
 

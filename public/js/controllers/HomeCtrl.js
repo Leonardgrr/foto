@@ -57,8 +57,8 @@ app.controller('HomeCtrl', ["$mdDialog","$scope", "$http", "$firebaseArray", "$f
 	
 	// console.log($scope.userData);
 	// USER COMMENT CRUD
-	$scope.userPostComment = function(e){
-		console.log(e.keyCode);
+	$scope.userPostComment = function(){
+
 		$scope.comments.$add({
 			userId : $scope.userData.uid,
 			body: $scope.newComment.userSays
@@ -88,9 +88,10 @@ app.controller('HomeCtrl', ["$mdDialog","$scope", "$http", "$firebaseArray", "$f
 	$scope.thumbPath = 'imgs/thumb.png';
 
 	// EDIT COMMENT DIALOG CONTROLLERS
-	 $scope.showAdvanced = function(ev, user, index) {
-	 	$scope.editComment = user;
-	 	console.log('dippitydoodah',$scope.editComment.author);
+	 $scope.showAdvanced = function(ev, comment, index) {
+	 	$scope.editComment = comment;
+	 	console.log(comment);
+	 	// console.log('dippitydoodah',$scope.editComment.author);
 	 	$scope.editCommentIndex = index;
 	 	// console.log(user);
 	 	// console.log('comment'+ $scope.editComment.author);
@@ -114,10 +115,9 @@ app.controller('HomeCtrl', ["$mdDialog","$scope", "$http", "$firebaseArray", "$f
 
 	  // COMMENT DIALOG FUNCTIONS
 	  function DialogController($scope, $mdDialog, user, index) {
-	  	// var ref = new Firebase("https://smsfoto.firebaseio.com");
-		// $scope.users = $firebaseArray(ref);
-
-	  	// console.log(user);
+	  	// creates a reference back to firebase to use for edit
+	  	var ref = new Firebase("https://smsfoto.firebaseio.com");
+		$scope.comments = $firebaseArray(new Firebase("https://smsfoto.firebaseio.com/comments/"));
 	  	$scope.editComment = user;
 		$scope.editCommentIndex = index;
 
@@ -131,9 +131,8 @@ app.controller('HomeCtrl', ["$mdDialog","$scope", "$http", "$firebaseArray", "$f
 
 		  $scope.answer = function() {
 			console.log($scope.editCommentIndex);
-
-		  	$scope.users[$scope.editCommentIndex] = $scope.editComment;
-		  	$scope.users.$save($scope.editCommentIndex).then(function(ref){});
+		  	$scope.comments[$scope.editCommentIndex] = $scope.editComment;
+		  	$scope.comments.$save($scope.editCommentIndex).then(function(ref){});
 		    $mdDialog.hide();
 		  };
 		}
