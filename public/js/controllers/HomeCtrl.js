@@ -57,9 +57,8 @@ app.controller('HomeCtrl', ["$mdDialog","$scope", "$http", "$firebaseArray", "$f
 	
 	// console.log($scope.userData);
 	// USER COMMENT CRUD
-	$scope.userPostComment = function(){
-		console.log("new comment was posted");
-
+	$scope.userPostComment = function(e){
+		console.log(e.keyCode);
 		$scope.comments.$add({
 			userId : $scope.userData.uid,
 			body: $scope.newComment.userSays
@@ -68,10 +67,22 @@ app.controller('HomeCtrl', ["$mdDialog","$scope", "$http", "$firebaseArray", "$f
 	}
 
 	$scope.userRemoveComment = function(obj){
+		console.log("trying to delete");
+		console.log(obj);
 		$scope.comments.$remove(obj).then(function(ref){
+			var boot = "boot";
+			console.log(boot);
 			ref.key() === obj.$id; // true
+			console.log("deleted?");
 		})
 	}
+
+	// var obj = $firebaseObject(ref);
+	// obj.$remove().then(function(ref) {
+	//   // data has been deleted locally and in the database
+	// }, function(error) {
+	//   console.log("Error:", error);
+	// });
 
 	$scope.imagePath = 'imgs/tall.jpg';
 	$scope.thumbPath = 'imgs/thumb.png';
@@ -103,7 +114,7 @@ app.controller('HomeCtrl', ["$mdDialog","$scope", "$http", "$firebaseArray", "$f
 
 	  // COMMENT DIALOG FUNCTIONS
 	  function DialogController($scope, $mdDialog, user, index) {
-	  	var ref = new Firebase("https://smsfoto.firebaseio.com");
+	  	// var ref = new Firebase("https://smsfoto.firebaseio.com");
 		// $scope.users = $firebaseArray(ref);
 
 	  	// console.log(user);

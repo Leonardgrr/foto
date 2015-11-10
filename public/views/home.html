@@ -37,13 +37,13 @@
 		        <img ng-src="{{users[comment.userId].profilePic}}" alt="{{item.who}}" class="md-avatar">
 		        <div class="md-list-item-text">
 		        	<h3>{{users[comment.userId].userName}}</h3>
-		          <h3>{{comment.userId}}</h3>
+		          <!-- <h3>{{comment.userId}}</h3> -->
 		          <!-- <h4>{{comment.$id}}</h4> -->
 		          <p>
 		            {{comment.body}}
 		          </p>
 		          <md-button ng-click="showAdvanced($event, user, $index)" class="md-primary" ng-show="currentUser === comment.userId ">Edit comment </md-button>
-		          <md-button class="md-warn" ng-click="removeComment(user)" ng-show="currentUser === comment.userId ">Delete comment </md-button>
+		          <md-button class="md-warn" ng-click="userRemoveComment(comment)" ng-show="currentUser === comment.userId ">Delete comment </md-button>
 		        </div>
 		      </md-list-item>
 		    </md-list>
