@@ -1,7 +1,8 @@
 <md-content layout="column">
 	<md-content class="md-padding">
 		<md-card>
-		  <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
+		<!-- <iframe height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/streetview?location=13.5350%2C144.8025&key=AIzaSyCS49t-uAb_YZkcbJlu77HrAwWjDfsMYFo" allowfullscreen></iframe> -->
+		<img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
 			<md-toolbar md-scroll-shrink="" ng-if="true">
 				<div class="md-toolbar-tools">
 				  <h3>
@@ -36,13 +37,13 @@
 		        <img ng-src="{{users[comment.userId].profilePic}}" alt="{{item.who}}" class="md-avatar">
 		        <div class="md-list-item-text">
 		        	<h3>{{users[comment.userId].userName}}</h3>
-		          <!-- <h3>{{comment.userId}}</h3> -->
-		          <h4>{{comment.$id}}</h4>
+		          <h3>{{comment.userId}}</h3>
+		          <!-- <h4>{{comment.$id}}</h4> -->
 		          <p>
 		            {{comment.body}}
 		          </p>
-		          <md-button ng-click="showAdvanced($event, user, $index)" class="md-primary" >Edit comment </md-button>
-		          <md-button class="md-warn" ng-click="removeComment(user)" >Delete comment </md-button>
+		          <md-button ng-click="showAdvanced($event, user, $index)" class="md-primary" ng-show="currentUser === comment.userId ">Edit comment </md-button>
+		          <md-button class="md-warn" ng-click="removeComment(user)" ng-show="currentUser === comment.userId ">Delete comment </md-button>
 		        </div>
 		      </md-list-item>
 		    </md-list>

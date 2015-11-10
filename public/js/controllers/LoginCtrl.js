@@ -16,6 +16,7 @@ app.controller('LoginCtrl', ["$mdDialog", "$scope", "$http", "$firebaseArray", "
 	$scope.authObj.$onAuth(function(authData) {
 	  if (authData) {
 	  	$scope.userData = authData;
+	  	
 	  	var user = $firebaseObject(new Firebase("https://smsfoto.firebaseio.com/users/"+authData.uid));
 
 	  	if (authData.provider === "google"){

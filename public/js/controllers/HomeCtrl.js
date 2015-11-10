@@ -8,18 +8,20 @@ app.controller('HomeCtrl', ["$mdDialog","$scope", "$http", "$firebaseArray", "$f
 	// $scope.userrs = $firebaseArray(Firebase("https://smsfoto.firebaseio.com/users/"));
 	$scope.users = $firebaseObject(new Firebase("https://smsfoto.firebaseio.com/users/"));
 	console.log($scope.users);
-	// console.log($scope.users.uid);
 	$scope.userFotos = $firebaseArray(ref);
 
 	$scope.authObj = $firebaseAuth(ref);
-	// $scope.logout = function(){
-	// 	$scope.authObj.$unauth();
-	// }
 
+
+	// This gets the data for the logged in user to CRUD
 	$scope.authObj.$onAuth(function(authData) {
 	  if (authData) {
 	  	$scope.userData = authData;
-	  	var user = $firebaseObject(new Firebase("https://smsfoto.firebaseio.com/users/"+authData.uid));
+	  	// var user = $firebaseObject(new Firebase("https://smsfoto.firebaseio.com/users/"+authData.uid));
+
+	  	// for use to use with current user crud ie: edit/delete user comments
+	  	$scope.currentUser = $scope.userData.uid;
+	  	console.log("current user is ", $scope.currentUser);
 	  } 
 	});
 
@@ -39,20 +41,21 @@ app.controller('HomeCtrl', ["$mdDialog","$scope", "$http", "$firebaseArray", "$f
 	// });
 
 	// COMMENT CRUD
-	$scope.postComment = function(){
-		$scope.comments.$add({
-			author : $scope.newComment.author,
-			body: $scope.newComment.body
-		})
-	}
+	// $scope.postComment = function(){
+	// 	$scope.comments.$add({
+	// 		author : $scope.newComment.author,
+	// 		body: $scope.newComment.body
+	// 	})
+	// 	$scope.newComment.userSays = "";
+	// }
 
-	$scope.removeComment = function(obj){
-		$scope.users.$remove(obj).then(function(ref){
-			ref.key() === obj.$id; // true
-		})
-	}
+	// $scope.removeComment = function(obj){
+	// 	$scope.users.$remove(obj).then(function(ref){
+	// 		ref.key() === obj.$id; // true
+	// 	})
+	// }
 	
-	console.log($scope.userData);
+	// console.log($scope.userData);
 	// USER COMMENT CRUD
 	$scope.userPostComment = function(){
 		console.log("new comment was posted");
@@ -61,6 +64,7 @@ app.controller('HomeCtrl', ["$mdDialog","$scope", "$http", "$firebaseArray", "$f
 			userId : $scope.userData.uid,
 			body: $scope.newComment.userSays
 		})
+		$scope.newComment.userSays = "";
 	}
 
 	$scope.userRemoveComment = function(obj){
@@ -71,13 +75,6 @@ app.controller('HomeCtrl', ["$mdDialog","$scope", "$http", "$firebaseArray", "$f
 
 	$scope.imagePath = 'imgs/tall.jpg';
 	$scope.thumbPath = 'imgs/thumb.png';
-
-
-	// get the local json object
-	// $http.get('js/data.json').success(function(data){
-	// 	$scope.users = data
-	// 	console.log($scope.users);
-	// })
 
 	// EDIT COMMENT DIALOG CONTROLLERS
 	 $scope.showAdvanced = function(ev, user, index) {
@@ -129,66 +126,5 @@ app.controller('HomeCtrl', ["$mdDialog","$scope", "$http", "$firebaseArray", "$f
 		    $mdDialog.hide();
 		  };
 		}
-
-
-		//user uploads?
-// var spinner = new Spinner({color: '#ddd'});
-// var firebaseRef = 'https://smsfoto.firebaseio.com/';
-
-// function handleFileSelect(evt) {
-//   var f = evt.target.files[0];
-//   var reader = new FileReader();
-//   reader.onload = (function(theFile) {
-//     return function(e) {
-
-//       var filePayload = e.target.result;
-//       // Generate a location that can't be guessed using the file's contents and a random number
-//       var hash = CryptoJS.SHA256(Math.random() + CryptoJS.SHA256(filePayload));
-//       var f = new Firebase(firebaseRef + 'imgs/' + hash + '/filePayload');
-//       spinner.spin(document.getElementById('spin'));
-//       blah = e.target.result;
-//       console.log(blah);
-      
-//       // Set the file payload to Firebase and register an onComplete handler to stop the spinner and show the preview
-//       f.set(filePayload, function() { 
-//         spinner.stop();
-//         document.getElementById("pano").src = e.target.result;
-//         // $('#file-upload').hide();
-//         // Update the location bar so the URL can be shared with others
-//         // window.location.hash = hash;
-//       });
-//       return $scope.picture = blah;
-//     };
-//   })(f);
-//   reader.readAsDataURL(f);
-// }
-
-// $(function() {
-//   $('#spin').append(spinner);
-
-//   var idx = window.location.href.indexOf('#');
-//   var hash = (idx > 0) ? window.location.href.slice(idx + 1) : '';
-//   if (hash === '') {
-//     // No hash found, so render the file upload button.
-//     $('#file-upload').show();
-//     document.getElementById("file-upload").addEventListener('change', handleFileSelect, false);
-//   } else {
-//     // A hash was passed in, so let's retrieve and render it.
-//     spinner.spin(document.getElementById('spin'));
-//     var f = new Firebase(firebaseRef + '/pano/' + hash + '/filePayload');
-//     f.once('value', function(snap) {
-//       var payload = snap.val();
-//       if (payload != null) {
-//         document.getElementById("pano").src = payload;
-//       } else {
-//         $('#body').append("Not found");
-//       }
-//       spinner.stop();
-//     });
-//   }
-// });
-
-
-
 
 }]);
