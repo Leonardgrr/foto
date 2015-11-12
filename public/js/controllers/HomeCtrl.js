@@ -107,4 +107,36 @@ app.controller('HomeCtrl', ["$mdDialog","$scope", "$http", "$firebaseArray", "$f
 		}
 
 
+		
+  // function initPano() {
+  //       var panoOptions = {
+  //         pano: 'custom',
+  //         visible: true,
+  //         panoProvider: getCustomPanorama
+  //       };
+
+  //       var panorama = new google.maps.StreetViewPanorama(
+  //         document.getElementById('pano-canvas'), panoOptions);
+  //     }
+
+  //     function getCustomPanoramaTileUrl(pano, zoom, tileX, tileY) {
+  //       return 'imgs/photosphere.jpg';
+  //     }
+
+  //     function getCustomPanorama(pano, zoom, tileX, tileY) {
+  //       if (pano == 'custom') {
+  //         return {
+  //           location: {
+  //             pano: 'custom',
+  //             description: 'Custom Street View'
+  //           },
+  //           tiles: {
+  //             tileSize: new google.maps.Size( 5656 ,  2828 ),
+  //             worldSize: new google.maps.Size( 5656 ,  2828 ),
+  //             getTileUrl: getCustomPanoramaTileUrl
+  //           }
+  //         };
+  //       }
+  //     }
+
 }]);
