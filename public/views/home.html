@@ -1,7 +1,12 @@
 <md-content layout="column">
 	<md-content class="md-padding">
 		<md-card>
-		<!-- <iframe height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/streetview?location=13.5350%2C144.8025&key=AIzaSyCS49t-uAb_YZkcbJlu77HrAwWjDfsMYFo" allowfullscreen></iframe> -->
+		 
+		 <!-- PHOTOSPHERE IMAGE -->
+         <div id="pano-canvas" style="height: 500px"></div>
+
+
+         
 		<img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
 			<md-toolbar md-scroll-shrink="" ng-if="true">
 				<div class="md-toolbar-tools">
@@ -12,24 +17,6 @@
 			</md-toolbar>
 		  <md-card-content>
 		    <h2 class="md-title">Comments go HERE</h2>
-
-		<!-- COMMENTS SECTION -->
-<!-- 		  <md-content flex="">
-		    <md-list>
-		      <md-list-item class="md-3-line" ng-repeat="user in users | filter: search.text | orderBy: search.group:direction">
-		        <img ng-src="{{userData.google.profileImageURL}}" alt="{{item.who}}" class="md-avatar">
-		        <div class="md-list-item-text">
-		          <h3>{{user.user.google.displayName}}</h3>
-		          <h4>{{user.$id}}</h4>
-		          <p>
-		            {{user.body}}
-		          </p>
-		          <md-button ng-click="showAdvanced($event, user, $index)" class="md-primary" >Edit comment </md-button>
-		          <md-button class="md-warn" ng-click="removeComment(user)" >Delete comment </md-button>
-		        </div>
-		      </md-list-item>
-		    </md-list>
-		  </md-content> END COMMENTS SECTION -->
 		  		<!-- COMMENTS SECTION -->
 		  <md-content flex="">
 		    <md-list>
@@ -67,37 +54,4 @@
 					</form> <!-- END FORM SECTION -->
 				</div>
 		</md-card>
-
-
-<!-- <h1> old comment form</h1>
-<form ng-submit="userPostComment()">
-	<label for="">
-		<input type="hidden" ng-model="newComment.user" placeholder="{{userData.google.displayName}}" value="{{userData.google.displayName}}" autofocus>
-	</label>
-	<label for="">
-		<textarea name="" ng-model="newComment.userSays">New Comment</textarea>
-	</label>
-	<button type="submit">Submit</button>
-</form>
-
-<form>
-	<label for="">
-		<input type="text" ng-model="search.text" placeholder="search here" autofocus>
-	</label>
-	<label for="">
-		<select name="" id="" ng-model="search.group">
-			<option value="name">Name</option>
-			<option value="reknown">Reknown</option>
-		</select>
-	</label>
-
-	<label for="ascending">
-		<input type="radio" ng-model="direction" name="direction" id="ascending" checked>Ascending
-	</label>
-	<label for="descending">
-		<input type="radio" ng-model="direction" name="direction" id="descending" value="reverse">Descending
-	</label>
-</form> -->
-
-</md-content>
 

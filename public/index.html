@@ -16,8 +16,37 @@
       <meta name="theme-color" content="#3F51B5">
       <meta name="viewport" content="width=device-width">
 
-  <script src="sha256.js"></script>
+<script type="text/javascript">        
+  function initPano() {
+        var panoOptions = {
+          pano: 'custom',
+          visible: true,
+          panoProvider: getCustomPanorama
+        };
 
+        var panorama = new google.maps.StreetViewPanorama(
+          document.getElementById('pano-canvas'), panoOptions);
+      }
+
+      function getCustomPanoramaTileUrl(pano, zoom, tileX, tileY) {
+        return 'imgs/photosphere.jpg';
+      }
+
+      function getCustomPanorama(pano, zoom, tileX, tileY) {
+        if (pano == 'custom') {
+          return {
+            location: {
+              pano: 'custom',
+              description: 'Custom Street View'
+            },
+            tiles: {
+              tileSize: new google.maps.Size( 5656 ,  2828 ),
+              worldSize: new google.maps.Size( 5656 ,  2828 ),
+              getTileUrl: getCustomPanoramaTileUrl
+            }
+          };
+        }
+      }</script>
 
       <title>foto</title>
       
@@ -33,11 +62,11 @@
               <md-icon class="material-icons">home</md-icon>
             </md-button>
             <h2>
-              <span>Snappy snap snap</span>
+              <span>AVA</span>
             </h2>
             <span flex></span>
             <md-button class="md-icon-button" aria-label="Favorite">
-              <md-icon class="material-icons" >favorite</md-icon>
+              <a ng-href="explore" ng-href="explore"><md-icon class="material-icons">explore</md-icon></a>
             </md-button>
             <md-button class="md-icon-button" aria-label="Sign In" ng-click="showAdvanced($event, user, $index)">
               <a ng-href="account"><md-icon class="material-icons" >account_circle</md-icon></a>
@@ -47,10 +76,10 @@
         </md-content> <!-- END MAIN TOOLBAR -->
 
         <!-- FAB TOOLBAR -->
-        <md-fab-toolbar md-open="demo.isOpen" md-direction="left">
+        <md-fab-toolbar md-open="demo.isOpen" md-direction="left" >
           <md-fab-trigger class="align-with-text">
-            <md-button aria-label="add" class="md-fab md-accent">
-              <md-icon  class="material-icons">add</md-icon>
+            <md-button aria-label="add" class="md-fab md-primary">
+              <md-icon class="material-icons">add</md-icon>
               <md-tooltip>More</md-tooltip>
             </md-button>
           </md-fab-trigger>
@@ -71,6 +100,11 @@
 
         <!-- NG VIEW IS RIGHT HERE! -->
         <md-content class="md-padding" layout="column">
+
+        <!-- PHOTOSPHERE IMAGE -->
+         <div id="pano-canvas" style="height: 500px"></div>
+
+         
           <ng-view></ng-view>
         </md-content>
       </div>
@@ -93,5 +127,17 @@
       <script src="js/controllers/LoginCtrl.js"></script>
       <script src="js/controllers/MaterialCtrl.js"></script>
 
+
+   
+
+    
+
+    <!-- GOOGLE MAPS API KEY -->
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCS49t-uAb_YZkcbJlu77HrAwWjDfsMYFo&signed_in=true&callback=initPano"
+        async defer>
+    </script>
+
     </body>
 </html>
+

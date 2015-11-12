@@ -25,37 +25,6 @@ app.controller('HomeCtrl', ["$mdDialog","$scope", "$http", "$firebaseArray", "$f
 	  } 
 	});
 
-
-	// $scope.authObj.$onAuth(function(authData) {
-	//   if (authData) {
-	//   	$scope.userData = authData;
-	//   	var user = $firebaseObject(new Firebase("https://smsfoto.firebaseio.com/users/"+authData.uid));
-
-	//   	user.profilePic = authData.google.profileImageURL;
-	//   	user.userName = authData.google.displayName;
-	//   	user.$save();
-	//     // console.log("Logged in as:", authData.google.displayName);
-	//   } else {
-	//     // console.log("Logged out");
-	//   }
-	// });
-
-	// COMMENT CRUD
-	// $scope.postComment = function(){
-	// 	$scope.comments.$add({
-	// 		author : $scope.newComment.author,
-	// 		body: $scope.newComment.body
-	// 	})
-	// 	$scope.newComment.userSays = "";
-	// }
-
-	// $scope.removeComment = function(obj){
-	// 	$scope.users.$remove(obj).then(function(ref){
-	// 		ref.key() === obj.$id; // true
-	// 	})
-	// }
-	
-	// console.log($scope.userData);
 	// USER COMMENT CRUD
 	$scope.userPostComment = function(){
 
@@ -136,5 +105,6 @@ app.controller('HomeCtrl', ["$mdDialog","$scope", "$http", "$firebaseArray", "$f
 		    $mdDialog.hide();
 		  };
 		}
+
 
 }]);
