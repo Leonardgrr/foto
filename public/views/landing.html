@@ -1,21 +1,34 @@
+<div ng-cloak>
+  <md-content>
+   <md-toolbar>
+    <div class="md-toolbar-tools">
+      <md-button class="md-icon-button" aria-label="home" ng-href="/">
+        <md-icon class="material-icons">home</md-icon>
+      </md-button>
+      <h2>
+        <span>AVA</span>
+      </h2>
+      <span flex></span>
+      <md-button ng-show="userData" class="md-icon-button" aria-label="Favorite">
+        <a ng-href="explore" ng-href="explore"><md-icon class="material-icons">explore</md-icon></a>
+      </md-button>
+      <md-button ng-show="userData" class="md-icon-button" aria-label="Sign In" ng-click="showAdvanced($event, user, $index)">
+        <a ng-href="account"><md-icon class="material-icons" >account_circle</md-icon></a>
+      </md-button>
+    </div>
+    </md-toolbar>
+  </md-content>
+</div>
 
-<!--     <section layout="row" layout-sm="column" layout-align="center center" layout-wrap="">
-      <md-button>Explore</md-button>
-      <md-button md-no-ink="" class="md-primary">Primary (md-noink)</md-button>
-      <md-button ng-disabled="true" class="md-primary">Disabled</md-button>
-      <md-button class="md-warn">Warning</md-button>
-    </section> -->
-
-
-
-<section layout="row" layout-sm="column" layout-align="center center" layout-wrap="">
+<!-- <div id="pano-canvas" style="height: 500px"></div> -->
+<!-- <section layout="row" layout-sm="column" layout-align="center center" layout-wrap="">
   <md-button class="md-raised md-accent" ng-href="explore">explore</md-button>
-
+ -->
       <!-- <md-button class="md-raised">Button</md-button> -->
 <!--       <md-button class="md-raised md-primary" ng-click="loginDialog($event, user, $index)">Login</md-button>
       <md-button class="md-raised md-primary" ng-click="login()">Login with github</md-button> -->
       <md-button class="md-raised md-warn" ng-click="logout()" ng-show="userData">LogOut</md-button>
-      <md-button class="md-raised md-accent" ng-show="userData" ng-href="explore">explore</md-button>
+<!--       <md-button class="md-raised md-accent" ng-show="userData" ng-href="explore">explore</md-button> -->
       <!-- <md-button class="md-raised md-warn">Warn</md-button>
       <div class="label">Raised</div> -->
 
@@ -50,7 +63,7 @@
   </div>
 
 <!--   pano stuff -->
-  <div id="pano-canvas" style="height: 500px"></div>
+<!--   <div id="pano-canvas" style="height: 500px"></div> -->
 
 
 </div>

@@ -1,13 +1,32 @@
+<div ng-cloak>
+	<md-content>
+	 <md-toolbar>
+	  <div class="md-toolbar-tools">
+	    <md-button class="md-icon-button" aria-label="home" ng-href="/">
+	      <md-icon class="material-icons">home</md-icon>
+	    </md-button>
+	    <h2>
+	      <span>AVA</span>
+	    </h2>
+	    <span flex></span>
+	    <md-button class="md-icon-button" aria-label="Favorite">
+	      <a ng-href="explore" ng-href="explore"><md-icon class="material-icons">explore</md-icon></a>
+	    </md-button>
+	    <md-button class="md-icon-button" aria-label="Sign In" ng-click="showAdvanced($event, user, $index)">
+	      <a ng-href="account"><md-icon class="material-icons" >account_circle</md-icon></a>
+	    </md-button>
+	  </div>
+	  </md-toolbar>
+	</md-content>
+</div>
+
 <md-content layout="column">
 	<md-content class="md-padding">
 		<md-card>
 		 
 		 <!-- PHOTOSPHERE IMAGE -->
          <div id="pano-canvas" style="height: 500px"></div>
-
-
-         
-		<img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
+		<!-- <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out"> -->
 			<md-toolbar md-scroll-shrink="" ng-if="true">
 				<div class="md-toolbar-tools">
 				  <h3>

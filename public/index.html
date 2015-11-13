@@ -4,58 +4,20 @@
       <base href="/"></base>
       <meta charset="UTF-8">
       <link rel="shortcut icon" href="http://iconshow.me/media/images/Mixed/line-icon/png/512/camera-512.png">
-
       <link href='https://fonts.googleapis.com/css?family=Asap' rel='stylesheet' type='text/css'>
       <link href='https://fonts.googleapis.com/css?family=Raleway:400,100,200,700' rel='stylesheet' type='text/css'>
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      
-
       <link rel="stylesheet" href="/bower/angular-material/angular-material.css">
       <link href="css/main.css" rel="stylesheet">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
       <meta name="theme-color" content="#3F51B5">
       <meta name="viewport" content="width=device-width">
-
-<script type="text/javascript">        
-  function initPano() {
-        var panoOptions = {
-          pano: 'custom',
-          visible: true,
-          panoProvider: getCustomPanorama
-        };
-
-        var panorama = new google.maps.StreetViewPanorama(
-          document.getElementById('pano-canvas'), panoOptions);
-      }
-
-      function getCustomPanoramaTileUrl(pano, zoom, tileX, tileY) {
-        return 'imgs/photosphere.jpg';
-      }
-
-      function getCustomPanorama(pano, zoom, tileX, tileY) {
-        if (pano == 'custom') {
-          return {
-            location: {
-              pano: 'custom',
-              description: 'Custom Street View'
-            },
-            tiles: {
-              tileSize: new google.maps.Size( 5656 ,  2828 ),
-              worldSize: new google.maps.Size( 5656 ,  2828 ),
-              getTileUrl: getCustomPanoramaTileUrl
-            }
-          };
-        }
-      }
-      </script>
-
       <title>foto</title>
-      
     </head>
     <body layout="column">
 
     <!-- MAIN TOOLBAR -->
-      <div ng-cloak>
+<!--       <div ng-cloak>
         <md-content>
          <md-toolbar>
           <div class="md-toolbar-tools">
@@ -74,10 +36,11 @@
             </md-button>
           </div>
           </md-toolbar>
-        </md-content> <!-- END MAIN TOOLBAR -->
+        </md-content>  -->
+        <!-- END MAIN TOOLBAR -->
 
         <!-- FAB TOOLBAR -->
-        <md-fab-toolbar md-open="demo.isOpen" md-direction="left" >
+<!--         <md-fab-toolbar md-open="demo.isOpen" md-direction="left" >
           <md-fab-trigger class="align-with-text">
             <md-button aria-label="add" class="md-fab md-primary">
               <md-icon class="material-icons">add</md-icon>
@@ -97,18 +60,13 @@
               </md-button>
             </md-fab-actions>
           </md-toolbar>
-        </md-fab-toolbar> <!-- END FAB TOOLBAR -->
+        </md-fab-toolbar>  -->
+        <!-- END FAB TOOLBAR -->
 
         <!-- NG VIEW IS RIGHT HERE! -->
-        <md-content class="md-padding" layout="column">
-
-        <!-- PHOTOSPHERE IMAGE -->
-         <div id="pano-canvas" style="height: 500px"></div>
-
-
+       
           <ng-view></ng-view>
-        </md-content>
-      </div>
+      
 
       <!-- angular and firebase stuff -->
       <script src="bower/angular/angular.js"></script>
@@ -129,13 +87,13 @@
       <script src="js/controllers/MaterialCtrl.js"></script>
 
 
-   
-
-    
-
     <!-- GOOGLE MAPS API KEY -->
+    <!-- <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCS49t-uAb_YZkcbJlu77HrAwWjDfsMYFo&signed_in=true&callback=initPano"
+        async defer>
+    </script> -->
     <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCS49t-uAb_YZkcbJlu77HrAwWjDfsMYFo&signed_in=true&callback=initPano"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCS49t-uAb_YZkcbJlu77HrAwWjDfsMYFo&signed_in=true"
         async defer>
     </script>
 

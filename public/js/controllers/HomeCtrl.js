@@ -1,5 +1,5 @@
 // angular.module('foto')
-app.controller('HomeCtrl', ["$mdDialog","$scope", "$http", "$firebaseArray", "$firebaseAuth", "$firebaseObject", function($mdDialog, $scope, $http, $firebaseArray, $firebaseAuth, $firebaseObject){
+app.controller('HomeCtrl', ["$mdDialog", "$location","$rootScope", "$scope", "$http", "$firebaseArray", "$firebaseAuth", "$firebaseObject", function($mdDialog, $location, $rootScope, $scope, $http, $firebaseArray, $firebaseAuth, $firebaseObject){
 	console.log("Hola Amigo")
 
 	var ref = new Firebase("https://smsfoto.firebaseio.com");
@@ -11,19 +11,28 @@ app.controller('HomeCtrl', ["$mdDialog","$scope", "$http", "$firebaseArray", "$f
 	$scope.userFotos = $firebaseArray(ref);
 
 	$scope.authObj = $firebaseAuth(ref);
-
-
+	
 	// This gets the data for the logged in user to CRUD
 	$scope.authObj.$onAuth(function(authData) {
-	  if (authData) {
-	  	$scope.userData = authData;
-	  	// var user = $firebaseObject(new Firebase("https://smsfoto.firebaseio.com/users/"+authData.uid));
-
-	  	// for use to use with current user crud ie: edit/delete user comments
-	  	$scope.currentUser = $scope.userData.uid;
-	  	console.log("current user is ", $scope.currentUser);
-	  } 
+		$rootScope.authorize(authData);
+		$rootScope.initPano('pano-canvas');
+		if (authData) {
+		  	$scope.userData = authData;
+		  	// for use to use with current user crud ie: edit/delete user comments
+		  	$scope.currentUser = $scope.userData.uid;
+		  	console.log("current user is ", $scope.currentUser);
+		} 
 	});
+
+	// USER COMMENT CRUD
+	$scope.userPostComment = function(){
+
+		$scope.comments.$add({
+			userId : $scope.userData.uid,
+			body: $scope.newComment.userSays
+		})
+		$scope.newComment.userSays = "";
+	}
 
 	// USER COMMENT CRUD
 	$scope.userPostComment = function(){
@@ -105,38 +114,5 @@ app.controller('HomeCtrl', ["$mdDialog","$scope", "$http", "$firebaseArray", "$f
 		    $mdDialog.hide();
 		  };
 		}
-
-
-		
-  // function initPano() {
-  //       var panoOptions = {
-  //         pano: 'custom',
-  //         visible: true,
-  //         panoProvider: getCustomPanorama
-  //       };
-
-  //       var panorama = new google.maps.StreetViewPanorama(
-  //         document.getElementById('pano-canvas'), panoOptions);
-  //     }
-
-  //     function getCustomPanoramaTileUrl(pano, zoom, tileX, tileY) {
-  //       return 'imgs/photosphere.jpg';
-  //     }
-
-  //     function getCustomPanorama(pano, zoom, tileX, tileY) {
-  //       if (pano == 'custom') {
-  //         return {
-  //           location: {
-  //             pano: 'custom',
-  //             description: 'Custom Street View'
-  //           },
-  //           tiles: {
-  //             tileSize: new google.maps.Size( 5656 ,  2828 ),
-  //             worldSize: new google.maps.Size( 5656 ,  2828 ),
-  //             getTileUrl: getCustomPanoramaTileUrl
-  //           }
-  //         };
-  //       }
-  //     }
 
 }]);

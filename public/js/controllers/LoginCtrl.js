@@ -1,32 +1,37 @@
-app.controller('LoginCtrl', ["$mdDialog", "$scope", "$http", "$firebaseArray", "$firebaseAuth", "$firebaseObject", 
-	function($mdDialog, $scope, $http, $firebaseArray, $firebaseAuth, $firebaseObject, user, Auth){
+app.controller('LoginCtrl', ["$mdDialog", "$location", "$route", "$rootScope", "$scope", "$http", "$firebaseArray", "$firebaseAuth", "$firebaseObject", 
+	function($mdDialog, $location, $route, $rootScope, $scope, $http, $firebaseArray, $firebaseAuth, $firebaseObject, user, Auth){
 	var ref = new Firebase("https://smsfoto.firebaseio.com");
 	$scope.authObj = $firebaseAuth(ref);
 	$scope.users = $firebaseObject(new Firebase("https://smsfoto.firebaseio.com/users/"));
-
 	$scope.authObj.$onAuth(function(authData) {
-	  if (authData) {
-	  	$scope.userData = authData;
-
-	  	var user = $firebaseObject(new Firebase("https://smsfoto.firebaseio.com/users/"+authData.uid));
-
-	  	if (authData.provider === "google"){
-		  	user.profilePic = authData.google.profileImageURL;
-		  	user.userName = authData.google.displayName;
-		  	user.$save();
-	  	}else if (authData.provider === "twitter"){
-	  		user.profilePic = authData.twitter.profileImageURL;
-		  	user.userName = authData.twitter.displayName;
-		  	user.$save();
-	  	}else if (authData.provider === "facebook"){
-	  		user.profilePic = authData.facebook.profileImageURL;
-		  	user.userName = authData.facebook.displayName;
-		  	user.$save();	
-	  	}
-	  } else {
-	    // console.log("Logged out");
-	  }
+	  $rootScope.authorize(authData);
+	  $rootScope.initPano('pano-canvas');
 	});
+
+	$rootScope.authorize = function(authData){
+		if (authData) {
+		  	$scope.userData = authData;
+
+		  	var user = $firebaseObject(new Firebase("https://smsfoto.firebaseio.com/users/"+authData.uid));
+
+		  	if (authData.provider === "google"){
+			  	user.profilePic = authData.google.profileImageURL;
+			  	user.userName = authData.google.displayName;
+			  	user.$save();
+		  	}else if (authData.provider === "twitter"){
+		  		user.profilePic = authData.twitter.profileImageURL;
+			  	user.userName = authData.twitter.displayName;
+			  	user.$save();
+		  	}else if (authData.provider === "facebook"){
+		  		user.profilePic = authData.facebook.profileImageURL;
+			  	user.userName = authData.facebook.displayName;
+			  	user.$save();	
+		  	}
+		} else {
+		  	//if user not logged in
+		  	$location.path('/');
+		}
+	}
 
 	$scope.login = function(){
 		$scope.authObj.$authWithOAuthPopup("google").then(function(authData) {
@@ -64,44 +69,40 @@ app.controller('LoginCtrl', ["$mdDialog", "$scope", "$http", "$firebaseArray", "
 	}
 
 	$scope.logout = function(){
-		console.log("did i log out?");
 		$scope.authObj.$unauth();
+		$route.reload();
 	}
 
+	//Pano Scripts
+	$rootScope.initPano = function(elementId){
+	    var panoOptions = {
+	      pano: 'custom',
+	      visible: true,
+	      panoProvider: getCustomPanorama
+	    };
 
-	// PANO STUFF
+	    var panorama = new google.maps.StreetViewPanorama(
+	      document.getElementById(elementId), panoOptions)
 
+	      function getCustomPanoramaTileUrl(pano, zoom, tileX, tileY) {
+	        return 'imgs/photosphere.jpg';
+	      }
 
-	// function initPano() {
- //        var panoOptions = {
- //          pano: 'custom',
- //          visible: true,
- //          panoProvider: getCustomPanorama
- //        };
-
- //        var panorama = new google.maps.StreetViewPanorama(
- //          document.getElementById('pano-canvas'), panoOptions);
- //      }
-
- //      function getCustomPanoramaTileUrl(pano, zoom, tileX, tileY) {
- //        return 'photosphere.jpg';
- //      }
-
- //      function getCustomPanorama(pano, zoom, tileX, tileY) {
- //        if (pano == 'custom') {
- //          return {
- //            location: {
- //              pano: 'custom',
- //              description: 'Custom Street View'
- //            },
- //            tiles: {
- //              tileSize: new google.maps.Size( 5656 ,  2828 ),
- //              worldSize: new google.maps.Size( 5656 ,  2828 ),
- //              getTileUrl: getCustomPanoramaTileUrl
- //            }
- //          };
- //        }
- //      }
-
+	      function getCustomPanorama(pano, zoom, tileX, tileY) {
+	        if (pano == 'custom') {
+	          return {
+	            location: {
+	              pano: 'custom',
+	              description: 'Custom Street View'
+	            },
+	            tiles: {
+	              tileSize: new google.maps.Size( 5656 ,  2828 ),
+	              worldSize: new google.maps.Size( 5656 ,  2828 ),
+	              getTileUrl: getCustomPanoramaTileUrl
+	            }
+	          };
+	        }
+	    }
+	}
 
 }]);
