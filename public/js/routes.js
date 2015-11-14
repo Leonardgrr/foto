@@ -21,4 +21,8 @@ app.config(function($routeProvider,$locationProvider) {
 		templateUrl: 'views/user.html',
 		controller: 'LoginCtrl'
 	})
+	.when('/detail/:imageID', {
+		templateUrl: 'views/detail.html',
+		controller: 'DetailCtrl'
+	})
 });

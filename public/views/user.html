@@ -23,25 +23,112 @@
 <div ng-show="userData" layout="column" layout-align="center center">
 <div id="spin"></div>
 
-<h1>Upload a picture</h1>
-<input class="hidden" type="file" accept="image/*" capture="camera" id="file-upload">
-<br/>
-<!-- <img class="pano" id="pano" /> -->
-<img src= "{{picture}}">
 
-
-<div>
+<md-content layout="column">
+	<md-content class="md-padding">
+		<md-card >
 	
+		 <img ng-src="{{userFotos}}" class="md-card-image" alt="Washed Out">
+	
+		 <!-- PHOTOSPHERE IMAGE -->
+         <!-- <div id="pano-canvas" style="height: 500px"></div> -->
+		<!-- <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out"> -->
+			<md-toolbar md-scroll-shrink="" ng-if="true">
+				<div class="md-toolbar-tools">
+				  <h3>
+				    <span>Your pictures</span>
+				  </h3>
+				</div>
+			</md-toolbar>
+		  <md-card-content>
+		    <h2 class="md-title">upload a picture</h2>
+		<br>
 
+				  <!-- COMMENTS SECTION -->
+		  <md-content flex="" >
+		    <md-list  ng-repeat="image in pictures">
+		      <md-list-item class="md-3-line" ng-show="currentUser === image.userId">
+		        <img ng-src="{{users[image.userId].profilePic}}" alt="{{item.who}}" class="md-avatar">
+		        <div class="md-list-item-text">
+		        <h3>{{users[pictures.userId].userName}}</h3>
+		          <!-- <h3>{{image.userId}}</h3>
+		          <h4>{{image.picture}}</h4> -->
+		          <a ng-href="detail" ><img src= "{{image.picture}}" class="thumb"></a>
+
+		        </div>
+		      </md-list-item>
+		    </md-list>
+		  </md-content> <!-- END COMMENTS SECTION -->
+		<br>
+		<!-- FORM SECTION -->
+		<form ng-submit="userAddPicture()">
+		   	<div layout="" layout-sm="column">
+				<md-input-container flex="" >
+				  <label>Give a direct URL link</label>
+				  <textarea name="" ng-model="newPicture.userPic" ng-keydown="$event.which === 13 && userAddPicture()">Give a direct URL link</textarea>
+				</md-input-container>
+			</div>
+
+			</md-card-content>
+				<div class="md-actions" layout="row" layout-align="end center">
+					<md-button type="submit">
+						<md-icon class="material-icons">send</md-icon>
+						<md-tooltip>Submit</md-tooltip>
+					</md-button>
+					</form> <!-- END FORM SECTION -->
+				</div>
+		</md-card>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+<input class="hidden" type="file" accept="image/*" capture="camera" id="file-upload"> -->
+<div id = "body">
+  <div id="spin"></div>
+  <input class="hidden" type="file" accept="image/*" capture="camera" id="file-upload">
+  <br/>
+  <img class="pictured" id="pictured" />
 </div>
+
+
+<md-card>
+      <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
+      <md-card-content>
+        <h2 class="md-title">Paracosm</h2>
+        <p>
+          The titles of Washed Out's breakthrough song and the first single from Paracosm share the
+          two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
+        </p>
+      </md-card-content>
+    </md-card>
+
 
 
 	<md-button class="md-raised md-warn" ng-href="/" ng-click="logout()" ng-show="userData">LogOut</md-button>
     <md-button class="md-raised md-accent" ng-show="userData" ng-href="explore">explore</md-button>
 
-<!-- 	<input id="fileInput" name="file" type="file" multiple>
-	<md-button id="uploadButton" class="md-raised md-primary"> Choose Files </md-button>
- -->
 
 	<h2>Weclome back</h2>
 	<h2>{{userData.facebook.displayName}}</h2>

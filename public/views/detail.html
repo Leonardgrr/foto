@@ -18,13 +18,37 @@
 	  </div>
 	  </md-toolbar>
 	</md-content>
+<!-- <photosphere ng-src="{{trustSrc(movie.src)}}" -->
+<!-- src="{{imageURL}}" -->
+<!-- <img ng-src="{{trustSrc(movie.src)}}"> -->
+
+<!-- NEW PHOTOSPHERE TRICK DOESN'T WORK HERE! -->
+<div layout="column" layout-align="center center">
+		<photosphere src="{{imageURL}}"
+		
+
+                 speed="3"                 
+                 resolution="40"            
+                 controls="all"        
+		></photosphere>
+</div>
 
 <md-content layout="column">
 	<md-content class="md-padding">
 		<md-card>
-		 
+		<!-- NEW PHOTOSPHERE IMAGE -->
+<!-- 		<photosphere src="{{imagePath}}"
+              	width="1024"
+              	height="768"
+                 speed="3"                 
+                 resolution="40"            
+                 controls="all"        
+		></photosphere> -->
+
+
+		 <!-- <img ng-src="{{imageURL}}" class="md-card-image" alt="Washed Out"> -->
 		 <!-- PHOTOSPHERE IMAGE -->
-         <div id="pano-canvas" style="height: 500px"></div>
+         <!-- <div id="pano-canvas" style="height: 500px"></div> -->
 		<!-- <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out"> -->
 			<md-toolbar md-scroll-shrink="" ng-if="true">
 				<div class="md-toolbar-tools">

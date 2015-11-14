@@ -27,7 +27,9 @@
       <!-- <md-button class="md-raised">Button</md-button> -->
 <!--       <md-button class="md-raised md-primary" ng-click="loginDialog($event, user, $index)">Login</md-button>
       <md-button class="md-raised md-primary" ng-click="login()">Login with github</md-button> -->
+      <section layout="row" layout-sm="column" layout-align="center center" layout-wrap="">
       <md-button class="md-raised md-warn" ng-click="logout()" ng-show="userData">LogOut</md-button>
+      </section>
 <!--       <md-button class="md-raised md-accent" ng-show="userData" ng-href="explore">explore</md-button> -->
       <!-- <md-button class="md-raised md-warn">Warn</md-button>
       <div class="label">Raised</div> -->
@@ -42,7 +44,7 @@
     <br/>
     <img class="pano" id="pano" /> -->
     
-    <h2>Login with your social account :</h2>
+    <h2 ng-hide="userData">Login with your social account :</h2>
       
       <section layout="row" layout-sm="column" layout-align="center center" layout-wrap="">
         <md-button ng-hide="userData" style="color: #D50F25;" ng-href="account" ng-click="login()">Google+</md-button>
@@ -51,14 +53,56 @@
       </section>
 
   <div ng-show="userData" layout="column" layout-align="center center">
-    <h2>{{userData.facebook.displayName}}</h2>
+  
+  <!-- FEED -->
+<!--   <img src="imgs/photosphere.jpg"> -->
+<!-- NEW PHOTOSPHERE TRICK! -->
+<photosphere src="http://i.imgur.com/j5Rgo72.jpg"
+              
+                 speed="3"                 
+                 resolution="40"            
+                 controls="all"        
+></photosphere>
+<div ng-repeat="image in pictures">
+<md-content layout="column">
+  <md-content class="md-padding">
+    <md-card >
+   <!--  <img ng-click="detail(image.picture)" src= "{{image.picture}}" class="thumb"> -->
+      <a ng-href="detail/{{image.$id}}" ><img src= "{{image.picture}}" class="thumb"></a>
+
+      <!-- <img src= "{{image.picture}}" class="thumb"> -->
+      <md-card-content>
+    <br>
+          <!-- COMMENTS SECTION -->
+      <md-content flex="">
+        <md-list>
+          <md-list-item>
+
+            <img ng-src="{{users[image.userId].profilePic}}" alt="{{item.who}}" class="md-avatar">
+            <div class="md-list-item-text">
+              <h3>{{users[image.userId].userName}}</h3>
+            </div>
+          </md-list-item>
+        </md-list>
+      </md-content> 
+      <!-- END COMMENTS SECTION -->
+    <br>
+    <!-- FORM SECTION -->
+
+    </md-card>
+</div>
+
+
+
+
+    <!-- <h2>{{userData.facebook.displayName}}</h2>
     <img src= "{{userData.facebook.profileImageURL}}">
     <h2>{{userData.google.displayName}}</h2>
     <img src= "{{userData.google.profileImageURL}}">
     <h2>{{userData.twitter.displayName}}</h2>
     <img src= "{{userData.twitter.profileImageURL}}">
 
-    <pre>{{userData}}</pre>  
+    <pre>{{userData}}</pre>   -->
 
   </div>
 

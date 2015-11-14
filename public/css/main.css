@@ -9,6 +9,23 @@ body{
 }
 
 
+.thumb{
+  max-width: 400px;
+}
+
+.hidden {
+  display: none;
+}
+
+.pano {
+  height: 85%;
+  max-height: 85%;
+}
+
+#spin {
+  height: 60px;
+}
+
 .fabToolbardemoBasicUsage md-fab-toolbar.md-right md-fab-trigger.align-with-text {
   left: 7px; }
 

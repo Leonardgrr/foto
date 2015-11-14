@@ -1,5 +1,5 @@
 // angular.module('foto')
-app.controller('HomeCtrl', ["$mdDialog", "$location","$rootScope", "$scope", "$http", "$firebaseArray", "$firebaseAuth", "$firebaseObject", "$routeParams", function($mdDialog, $location, $rootScope, $scope, $http, $firebaseArray, $firebaseAuth, $firebaseObject, $routeParams){
+app.controller('DetailCtrl', ["$mdDialog", "$location","$rootScope", "$scope", "$http", "$firebaseArray", "$firebaseAuth", "$firebaseObject", "$routeParams", "$sce", function($mdDialog, $location, $rootScope, $scope, $http, $firebaseArray, $firebaseAuth, $firebaseObject, $routeParams, $sce){
 
 	var ref = new Firebase("https://smsfoto.firebaseio.com");
 	$scope.comments = $firebaseArray(new Firebase("https://smsfoto.firebaseio.com/comments/"));
@@ -9,23 +9,24 @@ app.controller('HomeCtrl', ["$mdDialog", "$location","$rootScope", "$scope", "$h
 	console.log($scope.users);
 
 	$scope.authObj = $firebaseAuth(ref);
-	
+
+
 	// This gets the data for the logged in user to CRUD
-	$scope.authObj.$onAuth(function(authData) {
-		$rootScope.authorize(authData);
-		// $rootScope.initPano('pano-canvas');
-		if (authData) {
-		  	$scope.userData = authData;
-		  	// for use to use with current user crud ie: edit/delete user comments
-		  	$scope.currentUser = $scope.userData.uid;
-		  	console.log("current user is ", $scope.currentUser);
-		} 
-	});
+	// $scope.authObj.$onAuth(function(authData) {
+	// 	$rootScope.authorize(authData);
+	// 	// $scope.initPano('pano-canvas');
+	// 	if (authData) {
+	// 	  	$scope.userData = authData;
+	// 	  	// for use to use with current user crud ie: edit/delete user comments
+	// 	  	$scope.currentUser = $scope.userData.uid;
+	// 	  	console.log("current user is ", $scope.currentUser);
+	// 	} 
+	// });
 
 	// USER COMMENT CRUD
 	$scope.userPostComment = function(){
 
-		$scope.comments.$add({
+		$scope.image.$add({
 			userId : $scope.userData.uid,
 			body: $scope.newComment.userSays
 		})
@@ -95,19 +96,37 @@ app.controller('HomeCtrl', ["$mdDialog", "$location","$rootScope", "$scope", "$h
 		  };
 		}
 
+		
+	 // $scope.trustSrc = function(src) {
+  //   	return $sce.trustAsResourceUrl(src);
+  // 	}
+
+  // 	$scope.movie = {src:"http://www.youtube.com/embed/Lx7ycjC8qjE", title:"Egghead.io AngularJS Binding"};
 
 
 
-	// $scope.image.$loaded()
-	//   .then(function(data) {
-	//   	$scope.imageURL = data.userId;
-	//   	$scope.imageURL = data.id;
-	//   	$scope.imageURL = data.picture;
-	//     // console.log(data); // true
-	//   })
-	//   .catch(function(error) {
-	//     console.error("Error:", error);
-	//   });
+	$scope.image.$loaded()
+	  .then(function(data) {
+	  	$scope.userId = data.userId;
+	  	$scope.id = data.id;
+	  	$scope.imageURL = data.picture;
+
+	  	// console.log($scope.imageURL);
+	    // console.log(data); // true
+	   	$scope.trustSrc = function(src) {
+    	return $sce.trustAsResourceUrl(src);
+	  	}
+	  	$scope.movie = {src:$scope.imageURL, title:"Egghead.io AngularJS Binding"};
+	  	console.log("this is ",$scope.movie.src);
+	})
+
+	  .catch(function(error) {
+	    console.error("Error:", error);
+	  });
+
+
+
+
 
 	//Pano Scripts
 	// $rootScope.initPano = function(elementId){
@@ -121,8 +140,6 @@ app.controller('HomeCtrl', ["$mdDialog", "$location","$rootScope", "$scope", "$h
 	//       document.getElementById(elementId), panoOptions)
 
 	//       function getCustomPanoramaTileUrl(pano, zoom, tileX, tileY) {
-	//         // return 'imgs/regular.jpg';
-	//         // return 'imgs/imgur.jpg';
 	//         return $scope.imageURL;
 	//       }
 
@@ -142,6 +159,9 @@ app.controller('HomeCtrl', ["$mdDialog", "$location","$rootScope", "$scope", "$h
 	//         }
 	//     }
 	// }
+
+
+	$scope.imagePath = 'imgs/photosphere.jpg';
 
 
 

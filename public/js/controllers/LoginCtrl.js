@@ -1,19 +1,20 @@
-app.controller('LoginCtrl', ["$mdDialog", "$location", "$route", "$rootScope", "$scope", "$http", "$firebaseArray", "$firebaseAuth", "$firebaseObject", 
-	function($mdDialog, $location, $route, $rootScope, $scope, $http, $firebaseArray, $firebaseAuth, $firebaseObject, user, Auth){
+app.controller('LoginCtrl', ["$mdDialog", "$location", "$route", "$rootScope", "$scope", "$http", "$firebaseArray", "$firebaseAuth", "$firebaseObject", "$routeParams",
+	function($mdDialog, $location, $route, $rootScope, $scope, $http, $firebaseArray, $firebaseAuth, $firebaseObject, $routeParams, user, Auth){
 	var ref = new Firebase("https://smsfoto.firebaseio.com");
 	$scope.authObj = $firebaseAuth(ref);
 	$scope.users = $firebaseObject(new Firebase("https://smsfoto.firebaseio.com/users/"));
+	$scope.pictures = $firebaseArray(new Firebase("https://smsfoto.firebaseio.com/pictures/"));
 	$scope.authObj.$onAuth(function(authData) {
 	  $rootScope.authorize(authData);
-	  $rootScope.initPano('pano-canvas');
+	  // $rootScope.initPano('pano-canvas');
 	});
+
+$scope.imagePath = 'imgs/photosphere.jpg';
 
 	$rootScope.authorize = function(authData){
 		if (authData) {
 		  	$scope.userData = authData;
-
 		  	var user = $firebaseObject(new Firebase("https://smsfoto.firebaseio.com/users/"+authData.uid));
-
 		  	if (authData.provider === "google"){
 			  	user.profilePic = authData.google.profileImageURL;
 			  	user.userName = authData.google.displayName;
@@ -47,9 +48,9 @@ app.controller('LoginCtrl', ["$mdDialog", "$location", "$route", "$rootScope", "
 	$scope.loginFacebook = function(){
 		console.log("facebook login dialog is here")
 		$scope.authObj.$authWithOAuthPopup("facebook").then(function(authData) {
-		  console.log("Logged in as:", authData.uid);
-		  console.log(authData.facebook.displayName);
-		  console.log(authData.facebook.profileImageURL);
+		  // console.log("Logged in as:", authData.uid);
+		  // console.log(authData.facebook.displayName);
+		  // console.log(authData.facebook.profileImageURL);
 		  $scope.userData = authData;
 		}).catch(function(error) {
 		  console.error("Authentication failed:", error);
@@ -68,41 +69,84 @@ app.controller('LoginCtrl', ["$mdDialog", "$location", "$route", "$rootScope", "
 		})
 	}
 
+	//LOGOUT
 	$scope.logout = function(){
 		$scope.authObj.$unauth();
 		$route.reload();
 	}
 
-	//Pano Scripts
-	$rootScope.initPano = function(elementId){
-	    var panoOptions = {
-	      pano: 'custom',
-	      visible: true,
-	      panoProvider: getCustomPanorama
-	    };
+		// This gets the data for the logged in user to CRUD
+	$scope.authObj.$onAuth(function(authData) {
+		$rootScope.authorize(authData);
+		if (authData) {
+		  	$scope.userData = authData;
+		  	// for use to use with current user crud ie: edit/delete user comments
+		  	$scope.currentUser = $scope.userData.uid;
+		  	console.log("current user is ", $scope.currentUser);
+		} 
+	});
 
-	    var panorama = new google.maps.StreetViewPanorama(
-	      document.getElementById(elementId), panoOptions)
 
-	      function getCustomPanoramaTileUrl(pano, zoom, tileX, tileY) {
-	        return 'imgs/photosphere.jpg';
-	      }
 
-	      function getCustomPanorama(pano, zoom, tileX, tileY) {
-	        if (pano == 'custom') {
-	          return {
-	            location: {
-	              pano: 'custom',
-	              description: 'Custom Street View'
-	            },
-	            tiles: {
-	              tileSize: new google.maps.Size( 5656 ,  2828 ),
-	              worldSize: new google.maps.Size( 5656 ,  2828 ),
-	              getTileUrl: getCustomPanoramaTileUrl
-	            }
-	          };
-	        }
-	    }
+	// //Pano Scripts
+	// $rootScope.initPano = function(elementId){
+	//     var panoOptions = {
+	//       pano: 'custom',
+	//       visible: true,
+	//       panoProvider: getCustomPanorama
+	//     };
+
+	//     var panorama = new google.maps.StreetViewPanorama(
+	//       document.getElementById(elementId), panoOptions)
+
+	//       function getCustomPanoramaTileUrl(pano, zoom, tileX, tileY) {
+	//         // return 'imgs/regular.jpg';
+	//         // return 'imgs/imgur.jpg';
+	//         return 'http://i.imgur.com/xSvT515.jpg';
+	//       }
+
+	//       function getCustomPanorama(pano, zoom, tileX, tileY) {
+	//         if (pano == 'custom') {
+	//           return {
+	//             location: {
+	//               pano: 'custom',
+	//               description: 'Custom Street View'
+	//             },
+	//             tiles: {
+	//               tileSize: new google.maps.Size( 5656 ,  2828 ),
+	//               worldSize: new google.maps.Size( 5656 ,  2828 ),
+	//               getTileUrl: getCustomPanoramaTileUrl
+	//             }
+	//           };
+	//         }
+	//     }
+	// }
+
+
+
+
+
+
+
+	$scope.userAddPicture = function(){
+
+		$scope.pictures.$add({
+			userId : $scope.userData.uid,
+			picture: $scope.newPicture.userPic
+		})
+		$scope.newPicture.userPic = "";
 	}
+
+
+
+
+
+
+
+
+
+
+
+
 
 }]);
