@@ -10,12 +10,12 @@
         <span>PanoramaGram</span>
       </h2>
       <span flex></span>
-      <md-button class="md-icon-button" aria-label="Sign In" ng-click="showAdvanced($event, user, $index)">
+      <md-button class="md-icon-button" ng-show="userData">
         <a ng-href="account"><md-icon class="material-icons" >account_circle</md-icon></a>
         <md-tooltip>My Profile</md-tooltip>
       </md-button>
-      <md-button class="md-icon-button" aria-label="Favorite">
-        <a ng-href="/" ng-click="logout()" ng-show="userData"><md-icon class="material-icons">exit_to_app</md-icon></a>
+      <md-button class="md-icon-button" ng-show="userData">
+        <a ng-href="/" ng-click="logout()"><md-icon class="material-icons">exit_to_app</md-icon></a>
         <md-tooltip>Log Out</md-tooltip>
       </md-button>
     </div>

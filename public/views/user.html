@@ -1,63 +1,42 @@
 <div ng-cloak>
-	<md-content>
-	 <md-toolbar>
-	  <div class="md-toolbar-tools">
-	    <md-button class="md-icon-button" aria-label="home" ng-href="/">
-	      <md-icon class="material-icons">home</md-icon>
-	      <md-tooltip>Home</md-tooltip>
-	    </md-button>
-	    <h2>
-	      <span>PanoramaGram</span>
-	    </h2>
-	    <span flex></span>
-	    <md-button class="md-icon-button" aria-label="Sign In" ng-click="showAdvanced($event, user, $index)">
-	      <a ng-href="account"><md-icon class="material-icons" >account_circle</md-icon></a>
-	      <md-tooltip>My Profile</md-tooltip>
-	    </md-button>
-	    <md-button class="md-icon-button" aria-label="Favorite">
-	      <a ng-href="/" ng-click="logout()" ng-show="userData"><md-icon class="material-icons">exit_to_app</md-icon></a>
-	      <md-tooltip>Log Out</md-tooltip>
-	    </md-button>
-	  </div>
-	  </md-toolbar>
-	</md-content>
+  <md-content>
+   <md-toolbar>
+    <div class="md-toolbar-tools">
+      <md-button class="md-icon-button" aria-label="home" ng-href="/">
+        <md-icon class="material-icons">home</md-icon>
+        <md-tooltip>Home</md-tooltip>
+      </md-button>
+      <h2>
+        <span>PanoramaGram</span>
+      </h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-show="userData">
+        <a ng-href="account"><md-icon class="material-icons" >account_circle</md-icon></a>
+        <md-tooltip>My Profile</md-tooltip>
+      </md-button>
+      <md-button class="md-icon-button" ng-show="userData">
+        <a ng-href="/" ng-click="logout()"><md-icon class="material-icons">exit_to_app</md-icon></a>
+        <md-tooltip>Log Out</md-tooltip>
+      </md-button>
+    </div>
+    </md-toolbar>
+  </md-content>
 </div>
 
 <div ng-show="userData" layout="column" layout-align="center center">
-<!-- <div id="spin"></div> -->
-<!-- 	<md-button class="md-raised md-warn" ng-href="/" ng-click="logout()" ng-show="userData">LogOut</md-button>
-    <md-button class="md-raised md-accent" ng-show="userData" ng-href="explore">explore</md-button>
-
- -->
 	<h2>Weclome back</h2>
-	<pre>{{userData}}</pre> 
-	<h2>{{userData.displayName}}</h2>
 	<img src= "" class="profilePicThumb">
  	<h2>{{userData.facebook.displayName}}</h2>
-	<img src= "{{userData.facebook.profileImageURL}}" class="profilePicThumb">
+	<!-- <img src= "{{userData.facebook.profileImageURL}}" class="profilePicThumb"> -->
 	<h2>{{userData.google.displayName}}</h2>
-	<img src= "{{userData.google.profileImageURL}}" class="profilePicThumb">
+	<!-- <img src= "{{userData.google.profileImageURL}}" class="profilePicThumb"> -->
 	<h2>{{userData.twitter.displayName}}</h2>
-	<img src= "{{userData.twitter.profileImageURL}}" class="profilePicThumb">
+	<!-- <img src= "{{userData.twitter.profileImageURL}}" class="profilePicThumb"> -->
 <md-content layout="column">
 	<md-content class="md-padding">
 		<md-card >
-		<!--  <img ng-src="{{userFotos}}" class="md-card-image" alt="Washed Out"> -->
-
-	
-		 <!-- PHOTOSPHERE IMAGE -->
-         <!-- <div id="pano-canvas" style="height: 500px"></div> -->
-		<!-- <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out"> -->
-<!-- 			<md-toolbar md-scroll-shrink="" ng-if="true">
-				<div class="md-toolbar-tools">
-				  <h3>
-				    <span>Your pictures</span>
-				  </h3>
-				</div>
-			</md-toolbar> -->
 		  <md-card-content>
-		  <!-- <img ng-src="{{users[image.userId].profilePic}}" alt="{{item.who}}" class="md-avatar"> -->
-		    <h2 class="md-title">upload a picture</h2>
+		    <h2 class="md-title">Your Collection</h2>
 		<br>
 
 				  <!-- COMMENTS SECTION -->
@@ -79,7 +58,7 @@
 		<form ng-submit="userAddPicture()">
 		   	<div layout="" layout-sm="column">
 				<md-input-container flex="" >
-				  <label>Give a direct URL link</label>
+				  <label>Submit the direct URL link to your photosphere</label>
 				  <textarea name="" ng-model="newPicture.userPic" ng-keydown="$event.which === 13 && userAddPicture()">Submit the direct URL link to your photosphere</textarea>
 				</md-input-container>
 			</div>
@@ -93,14 +72,5 @@
 					</form> <!-- END FORM SECTION -->
 				</div>
 		</md-card>
-
-<!-- 
-<input class="hidden" type="file" accept="image/*" capture="camera" id="file-upload"> -->
-<!-- 	<div id = "body">
-	  <div id="spin"></div>
-	  <input class="hidden" type="file" accept="image/*" capture="camera" id="file-upload">
-	  <br/>
-	  <img class="pictured" id="pictured" />
-	</div> -->
 
 </div>
