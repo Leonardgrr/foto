@@ -8,7 +8,7 @@ app.controller('LoginCtrl', ["$mdDialog", "$location", "$route", "$rootScope", "
 	  $rootScope.authorize(authData);
 	  // $rootScope.initPano('pano-canvas');
 	});
-
+// $rootScope.userData2 = authData;
 $scope.imagePath = 'imgs/photosphere.jpg';
 
 	$rootScope.authorize = function(authData){
@@ -82,7 +82,9 @@ $scope.imagePath = 'imgs/photosphere.jpg';
 		  	$scope.userData = authData;
 		  	// for use to use with current user crud ie: edit/delete user comments
 		  	$scope.currentUser = $scope.userData.uid;
+		  	$rootScope.currentUser1 = $scope.userData.uid;
 		  	console.log("current user is ", $scope.currentUser);
+		  	console.log("current user is ", $rootScope.currentUser1);
 		} 
 	});
 

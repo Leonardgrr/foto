@@ -5,11 +5,10 @@ app.controller('DetailCtrl', ["$mdDialog", "$location","$rootScope", "$scope", "
 	$scope.comments = $firebaseArray(new Firebase("https://smsfoto.firebaseio.com/comments/"));
 	$scope.users = $firebaseObject(new Firebase("https://smsfoto.firebaseio.com/users/"));
 	var imageRef = new Firebase("https://smsfoto.firebaseio.com/pictures/"+$routeParams.imageID);
-	$scope.image = $firebaseObject(imageRef);
-	console.log($scope.users);
-
 	$scope.authObj = $firebaseAuth(ref);
 
+	// grabs the slected image set as 'currentImage' for use in HTML ng-show line 64
+	$scope.currentImage = $routeParams.imageID;
 
 	// This gets the data for the logged in user to CRUD
 	// $scope.authObj.$onAuth(function(authData) {
@@ -23,12 +22,11 @@ app.controller('DetailCtrl', ["$mdDialog", "$location","$rootScope", "$scope", "
 	// 	} 
 	// });
 
-	// USER COMMENT CRUD
 	$scope.userPostComment = function(){
-
-		$scope.image.$add({
-			userId : $scope.userData.uid,
-			body: $scope.newComment.userSays
+		$scope.comments.$add({
+			userId : $rootScope.currentUser1,
+			body: $scope.newComment.userSays, 
+			imageID : $routeParams.imageID
 		})
 		$scope.newComment.userSays = "";
 	}
@@ -52,9 +50,6 @@ app.controller('DetailCtrl', ["$mdDialog", "$location","$rootScope", "$scope", "
 	 	$scope.editComment = comment;
 	 	console.log(comment);
 	 	$scope.editCommentIndex = index;
-	 	// console.log(user);
-	 	// console.log('comment'+ $scope.editComment.author);
-	 	// console.log('index'+ $scope.editCommentIndex);
 	    $mdDialog.show({
 	      controller: DialogController,
 	      templateUrl: './views/dialog.html',
@@ -97,32 +92,21 @@ app.controller('DetailCtrl', ["$mdDialog", "$location","$rootScope", "$scope", "
 		}
 
 		
-	 // $scope.trustSrc = function(src) {
-  //   	return $sce.trustAsResourceUrl(src);
-  // 	}
 
-  // 	$scope.movie = {src:"http://www.youtube.com/embed/Lx7ycjC8qjE", title:"Egghead.io AngularJS Binding"};
+		// working on some custom street view stuff
+		$scope.image.$loaded()
+		  .then(function(data) {
+		  	$scope.userId = data.userId;
+		  	$scope.id = data.id;
+		  	// $scope.imageURL = data.picture;
+		  	$scope.imageURL = $sce.trustAsResourceUrl(data.picture);
 
+		  	console.log("this is ", $scope.imageURL);
+		})
 
-
-	$scope.image.$loaded()
-	  .then(function(data) {
-	  	$scope.userId = data.userId;
-	  	$scope.id = data.id;
-	  	$scope.imageURL = data.picture;
-
-	  	// console.log($scope.imageURL);
-	    // console.log(data); // true
-	   	$scope.trustSrc = function(src) {
-    	return $sce.trustAsResourceUrl(src);
-	  	}
-	  	$scope.movie = {src:$scope.imageURL, title:"Egghead.io AngularJS Binding"};
-	  	console.log("this is ",$scope.movie.src);
-	})
-
-	  .catch(function(error) {
-	    console.error("Error:", error);
-	  });
+		  .catch(function(error) {
+		    console.error("Error:", error);
+		  });
 
 
 
@@ -159,13 +143,4 @@ app.controller('DetailCtrl', ["$mdDialog", "$location","$rootScope", "$scope", "
 	//         }
 	//     }
 	// }
-
-
-	$scope.imagePath = 'imgs/photosphere.jpg';
-
-
-
-
-
-
 }]);

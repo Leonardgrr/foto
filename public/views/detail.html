@@ -20,17 +20,15 @@
 	</md-content>
 <!-- <photosphere ng-src="{{trustSrc(movie.src)}}" -->
 <!-- src="{{imageURL}}" -->
-<!-- <img ng-src="{{trustSrc(movie.src)}}"> -->
+<!-- <img src="http://i.imgur.com/j5Rgo72.jpg"> -->
 
 <!-- NEW PHOTOSPHERE TRICK DOESN'T WORK HERE! -->
 <div layout="column" layout-align="center center">
-		<photosphere src="{{imageURL}}"
-		
-
+<!-- 		<photosphere src="{{imageURL}}"
                  speed="3"                 
                  resolution="40"            
                  controls="all"        
-		></photosphere>
+		></photosphere> -->
 </div>
 
 <md-content layout="column">
@@ -46,33 +44,32 @@
 		></photosphere> -->
 
 
-		 <!-- <img ng-src="{{imageURL}}" class="md-card-image" alt="Washed Out"> -->
+		 <img ng-src="{{imageURL}}" class="md-card-image">
 		 <!-- PHOTOSPHERE IMAGE -->
          <!-- <div id="pano-canvas" style="height: 500px"></div> -->
 		<!-- <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out"> -->
 			<md-toolbar md-scroll-shrink="" ng-if="true">
 				<div class="md-toolbar-tools">
 				  <h3>
-				    <span>Seattle Something</span>
+				    <span>A something</span>
 				  </h3>
 				</div>
 			</md-toolbar>
 		  <md-card-content>
-		    <h2 class="md-title">Comments go HERE</h2>
+		    <h2 class="md-title">Comments</h2>
 		  <!-- COMMENTS SECTION -->
-		  <md-content flex="">
-		    <md-list>
-		      <md-list-item class="md-3-line" ng-repeat="comment in comments | filter: search.text | orderBy: search.group:direction">
+		  <md-content flex=""> 
+		    <md-list ng-repeat="comment in comments | filter: search.text | orderBy: search.group:direction">
+		      <!-- NG-SHOW WILL ONLY SHOW COMMENTS WITH AN IMAGEID THAT MATCH THE SELECTED IMAGE -->
+		      <md-list-item class="md-3-line" ng-show="currentImage === comment.imageID" >
 		        <img ng-src="{{users[comment.userId].profilePic}}" alt="{{item.who}}" class="md-avatar">
 		        <div class="md-list-item-text">
 		        	<h3>{{users[comment.userId].userName}}</h3>
-		          <!-- <h3>{{comment.userId}}</h3> -->
-		          <!-- <h4>{{comment.$id}}</h4> -->
 		          <p>
 		            {{comment.body}}
 		          </p>
-		          <md-button ng-click="showAdvanced($event, comment, $index)" class="md-primary" ng-show="currentUser === comment.userId ">Edit comment </md-button>
-		          <md-button class="md-warn" ng-click="userRemoveComment(comment)" ng-show="currentUser === comment.userId ">Delete comment </md-button>
+		          <md-button ng-click="showAdvanced($event, comment, $index)" class="md-primary" ng-show="currentUser1 === comment.userId ">Edit comment </md-button>
+		          <md-button class="md-warn" ng-click="userRemoveComment(comment)" ng-show="currentUser1 === comment.userId ">Delete comment </md-button>
 		        </div>
 		      </md-list-item>
 		    </md-list>
