@@ -1,4 +1,10 @@
-app.config(function($routeProvider,$locationProvider) {
+app.config(function($routeProvider,$locationProvider, $sceDelegateProvider) {
+	$sceDelegateProvider.resourceUrlWhitelist([
+    // Allow same origin resource loads.
+    'self',
+    // Allow loading from imgur where demo photsphere are hosted from 
+    'http://i.imgur.com/**'
+  ]);
 	$locationProvider.html5Mode(true);
 	$routeProvider
 	.when('/', {

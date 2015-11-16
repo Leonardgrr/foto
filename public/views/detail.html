@@ -1,4 +1,3 @@
-
 	<md-content>
 	 <md-toolbar>
 	  <div class="md-toolbar-tools">
@@ -19,33 +18,32 @@
 	  </md-toolbar>
 	</md-content>
 <!-- <photosphere ng-src="{{trustSrc(movie.src)}}" -->
-<!-- src="{{imageURL}}" -->
+<!-- <img src="{{imageURL}}"></img> -->
 <!-- <img src="http://i.imgur.com/j5Rgo72.jpg"> -->
 
+
 <!-- NEW PHOTOSPHERE TRICK DOESN'T WORK HERE! -->
-<div layout="column" layout-align="center center">
-<!-- 		<photosphere src="{{imageURL}}"
-                 speed="3"                 
-                 resolution="40"            
-                 controls="all"        
-		></photosphere> -->
-</div>
+<!-- <img  ng-show="{{currentImage}} === {{imageURL}}" src="{{imageURL}}"> -->
 
 <md-content layout="column">
 	<md-content class="md-padding">
 		<md-card>
 		<!-- NEW PHOTOSPHERE IMAGE -->
-<!-- 		<photosphere src="{{imagePath}}"
+		<photosphere src="{{imageURL}}"
               	width="1024"
               	height="768"
                  speed="3"                 
                  resolution="40"            
                  controls="all"        
-		></photosphere> -->
+		></photosphere>
+
+		<!-- BUT WHY?! WILL ONLY WORK WHEN SRC COMES FROM A LOOP AND NOT A VARIABLE DECLARED IN THE CONTROLLER?! -->
+		<div layout="column" layout-align="center center" ng-repeat="image in pictures" ng-show="currentImage === image.$id">
+			<photosphere src="{{image.picture}}"></photosphere>
+		</div>
 
 
-		 <img ng-src="{{imageURL}}" class="md-card-image">
-		 <!-- PHOTOSPHERE IMAGE -->
+		 <!-- old PHOTOSPHERE IMAGE -->
          <!-- <div id="pano-canvas" style="height: 500px"></div> -->
 		<!-- <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out"> -->
 			<md-toolbar md-scroll-shrink="" ng-if="true">

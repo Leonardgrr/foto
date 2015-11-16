@@ -1,11 +1,13 @@
 // angular.module('foto')
-app.controller('DetailCtrl', ["$mdDialog", "$location","$rootScope", "$scope", "$http", "$firebaseArray", "$firebaseAuth", "$firebaseObject", "$routeParams", "$sce", function($mdDialog, $location, $rootScope, $scope, $http, $firebaseArray, $firebaseAuth, $firebaseObject, $routeParams, $sce){
+app.controller('DetailCtrl', ["$mdDialog", "$location","$rootScope", "$scope", "$http", "$firebaseArray", "$firebaseAuth", "$firebaseObject", "$routeParams", "$sce", "$parse",  function($mdDialog, $location, $rootScope, $scope, $http, $firebaseArray, $firebaseAuth, $firebaseObject, $routeParams, $sce, $parse){
 
 	var ref = new Firebase("https://smsfoto.firebaseio.com");
 	$scope.comments = $firebaseArray(new Firebase("https://smsfoto.firebaseio.com/comments/"));
 	$scope.users = $firebaseObject(new Firebase("https://smsfoto.firebaseio.com/users/"));
 	var imageRef = new Firebase("https://smsfoto.firebaseio.com/pictures/"+$routeParams.imageID);
+	$scope.pictures = $firebaseArray(new Firebase("https://smsfoto.firebaseio.com/pictures/"));
 	$scope.authObj = $firebaseAuth(ref);
+	$scope.image = $firebaseObject(imageRef);
 
 	// grabs the slected image set as 'currentImage' for use in HTML ng-show line 64
 	$scope.currentImage = $routeParams.imageID;
@@ -98,17 +100,15 @@ app.controller('DetailCtrl', ["$mdDialog", "$location","$rootScope", "$scope", "
 		  .then(function(data) {
 		  	$scope.userId = data.userId;
 		  	$scope.id = data.id;
-		  	// $scope.imageURL = data.picture;
-		  	$scope.imageURL = $sce.trustAsResourceUrl(data.picture);
-
+		  	$scope.imageURL =  data.picture;
+		  	// $scope.imageURL = $sce.trustAsResourceUrl(data.picture);
+		  	// $scope.imageURL = $sceDelegateProvider.resourceUrlWhitelist(data.picture);
 		  	console.log("this is ", $scope.imageURL);
 		})
 
 		  .catch(function(error) {
 		    console.error("Error:", error);
 		  });
-
-
 
 
 
