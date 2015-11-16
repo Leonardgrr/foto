@@ -75,16 +75,18 @@ $scope.imagePath = 'imgs/photosphere.jpg';
 		$route.reload();
 	}
 
-		// This gets the data for the logged in user to CRUD
+	// This gets the data for the logged in user to CRUD
 	$scope.authObj.$onAuth(function(authData) {
 		$rootScope.authorize(authData);
 		if (authData) {
 		  	$scope.userData = authData;
 		  	// for use to use with current user crud ie: edit/delete user comments
-		  	$scope.currentUser = $scope.userData.uid;
-		  	$rootScope.currentUser1 = $scope.userData.uid;
+		  	$rootScope.currentUser = $scope.userData.uid;
+		  	$rootScope.currentUserDataAll = $scope.userData;
+		  	// $rootScope.currentUser1 = $scope.userData.uid;
 		  	console.log("current user is ", $scope.currentUser);
-		  	console.log("current user is ", $rootScope.currentUser1);
+		  	console.log($scope.currentUserDataAll);
+		  	// console.log("current user is ", $rootScope.currentUser1);
 		} 
 	});
 
@@ -124,31 +126,13 @@ $scope.imagePath = 'imgs/photosphere.jpg';
 	//     }
 	// }
 
-
-
-
-
-
-
+	//user can save a link to their picture
 	$scope.userAddPicture = function(){
-
 		$scope.pictures.$add({
 			userId : $scope.userData.uid,
 			picture: $scope.newPicture.userPic
 		})
 		$scope.newPicture.userPic = "";
 	}
-
-
-
-
-
-
-
-
-
-
-
-
 
 }]);

@@ -13,20 +13,20 @@ app.controller('DetailCtrl', ["$mdDialog", "$location","$rootScope", "$scope", "
 	$scope.currentImage = $routeParams.imageID;
 
 	// This gets the data for the logged in user to CRUD
-	// $scope.authObj.$onAuth(function(authData) {
-	// 	$rootScope.authorize(authData);
-	// 	// $scope.initPano('pano-canvas');
-	// 	if (authData) {
-	// 	  	$scope.userData = authData;
-	// 	  	// for use to use with current user crud ie: edit/delete user comments
-	// 	  	$scope.currentUser = $scope.userData.uid;
-	// 	  	console.log("current user is ", $scope.currentUser);
-	// 	} 
-	// });
+	$scope.authObj.$onAuth(function(authData) {
+		$rootScope.authorize(authData);
+		// $scope.initPano('pano-canvas');
+		if (authData) {
+		  	$scope.userData = authData;
+		  	// for use to use with current user crud ie: edit/delete user comments
+		  	$scope.currentUser = $scope.userData.uid;
+		  	console.log("current user is ", $scope.currentUser);
+		} 
+	});
 
 	$scope.userPostComment = function(){
 		$scope.comments.$add({
-			userId : $rootScope.currentUser1,
+			userId : $rootScope.currentUser,
 			body: $scope.newComment.userSays, 
 			imageID : $routeParams.imageID
 		})
@@ -103,7 +103,7 @@ app.controller('DetailCtrl', ["$mdDialog", "$location","$rootScope", "$scope", "
 		  	$scope.imageURL =  data.picture;
 		  	// $scope.imageURL = $sce.trustAsResourceUrl(data.picture);
 		  	// $scope.imageURL = $sceDelegateProvider.resourceUrlWhitelist(data.picture);
-		  	console.log("this is ", $scope.imageURL);
+		  	console.log("this is", $scope.imageURL, "is there a space");
 		})
 
 		  .catch(function(error) {
