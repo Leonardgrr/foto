@@ -28,6 +28,16 @@
 
 <!-- NEW PHOTOSPHERE TRICK DOESN'T WORK HERE! -->
 <!-- <img  ng-show="{{currentImage}} === {{imageURL}}" src="{{imageURL}}"> -->
+<br>
+<div layout="column" layout-align="center center" ng-repeat="image in pictures" ng-show="currentImage === image.$id">
+<!-- <photosphere src="{{image.picture}}"
+  width="325"
+  height="200"
+  speed="3"                 
+  resolution="40"            
+  controls="all"        
+></photosphere> -->
+</div>
 
 <md-content layout="column">
 	<md-content class="md-padding">
@@ -54,22 +64,17 @@
 
 
 		 <!-- old PHOTOSPHERE IMAGE -->
-         <!-- <div id="pano-canvas" style="height: 500px"></div> -->
-		<!-- <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out"> -->
-<!-- 			<md-toolbar md-scroll-shrink="" ng-if="true">
-				<div class="md-toolbar-tools">
-				  <h3>
-				    <span>A something</span>
-				  </h3>
-				</div>
-			</md-toolbar> -->
+		 <!-- <p>{{imageId}}</p>
+         <div id="pano-canvas" style="height: 500px"></div> -->
+
+
 		  <md-card-content>
 		    <h2 class="md-title">Comments</h2>
 		  <!-- COMMENTS SECTION -->
 		  <md-content flex=""> 
-		    <md-list ng-repeat="comment in comments">
+		    <md-list >
 		      <!-- NG-SHOW WILL ONLY SHOW COMMENTS WITH AN IMAGEID THAT MATCH THE SELECTED IMAGE -->
-		      <md-list-item class="md-3-line" ng-show="currentImage === comment.imageID" >
+		      <md-list-item ng-repeat="comment in comments" class="md-3-line" ng-show="currentImage === comment.imageID" >
 		        <img ng-src="{{users[comment.userId].profilePic}}" alt="{{item.who}}" class="md-avatar">
 		        <div class="md-list-item-text">
 					<h3>{{users[comment.userId].userName}}</h3>

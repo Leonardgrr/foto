@@ -6,7 +6,7 @@ app.controller('LoginCtrl', ["$mdDialog", "$location", "$route", "$rootScope", "
 	$scope.pictures = $firebaseArray(new Firebase("https://smsfoto.firebaseio.com/pictures/"));
 	$scope.authObj.$onAuth(function(authData) {
 	  $rootScope.authorize(authData);
-	  // $rootScope.initPano('pano-canvas');
+	  //$rootScope.initPano('pano-canvas');
 	});
 // $rootScope.userData2 = authData;
 $scope.imagePath = 'imgs/photosphere.jpg';
@@ -84,8 +84,8 @@ $scope.imagePath = 'imgs/photosphere.jpg';
 		  	$rootScope.currentUser = $scope.userData.uid;
 		  	$rootScope.currentUserDataAll = $scope.userData;
 		  	// $rootScope.currentUser1 = $scope.userData.uid;
-		  	console.log("current user is ", $scope.currentUser);
-		  	console.log($scope.currentUserDataAll);
+		  	// console.log("current user is ", $scope.currentUser);
+		  	// console.log($scope.currentUserDataAll);
 		  	// console.log("current user is ", $rootScope.currentUser1);
 		} 
 	});
@@ -93,38 +93,7 @@ $scope.imagePath = 'imgs/photosphere.jpg';
 
 
 	// //Pano Scripts
-	// $rootScope.initPano = function(elementId){
-	//     var panoOptions = {
-	//       pano: 'custom',
-	//       visible: true,
-	//       panoProvider: getCustomPanorama
-	//     };
 
-	//     var panorama = new google.maps.StreetViewPanorama(
-	//       document.getElementById(elementId), panoOptions)
-
-	//       function getCustomPanoramaTileUrl(pano, zoom, tileX, tileY) {
-	//         // return 'imgs/regular.jpg';
-	//         // return 'imgs/imgur.jpg';
-	//         return 'http://i.imgur.com/xSvT515.jpg';
-	//       }
-
-	//       function getCustomPanorama(pano, zoom, tileX, tileY) {
-	//         if (pano == 'custom') {
-	//           return {
-	//             location: {
-	//               pano: 'custom',
-	//               description: 'Custom Street View'
-	//             },
-	//             tiles: {
-	//               tileSize: new google.maps.Size( 5656 ,  2828 ),
-	//               worldSize: new google.maps.Size( 5656 ,  2828 ),
-	//               getTileUrl: getCustomPanoramaTileUrl
-	//             }
-	//           };
-	//         }
-	//     }
-	// }
 
 	//user can save a link to their picture
 	$scope.userAddPicture = function(){

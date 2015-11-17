@@ -1,5 +1,5 @@
 // angular.module('foto')
-app.controller('DetailCtrl', ["$mdDialog", "$location","$rootScope", "$scope", "$http", "$firebaseArray", "$firebaseAuth", "$firebaseObject", "$routeParams", "$sce", "$parse",  function($mdDialog, $location, $rootScope, $scope, $http, $firebaseArray, $firebaseAuth, $firebaseObject, $routeParams, $sce, $parse){
+app.controller('DetailCtrl', ["$mdDialog", "$location","$rootScope", "$scope", "$http", "$firebaseArray", "$firebaseAuth", "$firebaseObject", "$routeParams", "$sce", "$parse","$rootScope",   function($mdDialog, $location, $rootScope, $scope, $http, $firebaseArray, $firebaseAuth, $firebaseObject, $routeParams, $sce, $parse, $rootScope){
 
 	var ref = new Firebase("https://smsfoto.firebaseio.com");
 	$scope.comments = $firebaseArray(new Firebase("https://smsfoto.firebaseio.com/comments/"));
@@ -8,14 +8,68 @@ app.controller('DetailCtrl', ["$mdDialog", "$location","$rootScope", "$scope", "
 	$scope.pictures = $firebaseArray(new Firebase("https://smsfoto.firebaseio.com/pictures/"));
 	$scope.authObj = $firebaseAuth(ref);
 	$scope.image = $firebaseObject(imageRef);
-
+			// working on some custom street view stuff
+	$scope.image.$loaded()
+	  .then(function(data) {
+	  	$scope.userId = data.userId;
+	  	$scope.imageId = data.$id;
+	  	$scope.imageURL =  data.picture;
+	  	// $scope.imageURL = $sce.trustAsResourceUrl(data.picture);
+	  	// $scope.imageURL = $sceDelegateProvider.resourceUrlWhitelist(data.picture);
+	  	console.log("this is", $scope.imageId);
+	})
+	  .catch(function(error) {
+	    console.error("Error:", error);
+	  });
 	// grabs the slected image set as 'currentImage' for use in HTML ng-show line 64
 	$scope.currentImage = $routeParams.imageID;
+
+
+	//Pano Scripts
+	$rootScope.initPano = function(elementId){
+		console.log("i am here", elementId);
+		var panoOptions = {
+			pano: 'custom',
+			visible: true,
+			panoProvider: getCustomPanorama,         
+			linksControl: false,
+			panControl: false,
+			enableCloseButton: false
+		};
+
+	    var panorama = new google.maps.StreetViewPanorama(
+	      document.getElementById(elementId), panoOptions)
+
+	      function getCustomPanoramaTileUrl(pano, zoom, tileX, tileY) {
+	        return $scope.imageURL;
+	      } 
+
+	      function getCustomPanorama(pano, zoom, tileX, tileY) {
+	        if (pano == 'custom') {
+	          return {
+	            location: {
+	              pano: 'custom',
+	              description: 'Custom Street View'
+	            },
+	            tiles: {
+	              tileSize: new google.maps.Size( 5656 ,  2828 ),
+	              worldSize: new google.maps.Size( 5656 ,  2828 ),
+	              getTileUrl: getCustomPanoramaTileUrl
+	            }
+	          };
+	        }
+	    }
+	}
+
+
+
+
+
 
 	// This gets the data for the logged in user to CRUD
 	$scope.authObj.$onAuth(function(authData) {
 		$rootScope.authorize(authData);
-		// $scope.initPano('pano-canvas');
+		$rootScope.initPano('pano-canvas');
 		if (authData) {
 		  	$scope.userData = authData;
 		  	// for use to use with current user crud ie: edit/delete user comments
@@ -93,54 +147,4 @@ app.controller('DetailCtrl', ["$mdDialog", "$location","$rootScope", "$scope", "
 		  };
 		}
 
-		
-
-		// working on some custom street view stuff
-		$scope.image.$loaded()
-		  .then(function(data) {
-		  	$scope.userId = data.userId;
-		  	$scope.id = data.id;
-		  	$scope.imageURL =  data.picture;
-		  	// $scope.imageURL = $sce.trustAsResourceUrl(data.picture);
-		  	// $scope.imageURL = $sceDelegateProvider.resourceUrlWhitelist(data.picture);
-		  	console.log("this is", $scope.imageURL, "is there a space");
-		})
-
-		  .catch(function(error) {
-		    console.error("Error:", error);
-		  });
-
-
-
-	//Pano Scripts
-	// $rootScope.initPano = function(elementId){
-	//     var panoOptions = {
-	//       pano: 'custom',
-	//       visible: true,
-	//       panoProvider: getCustomPanorama
-	//     };
-
-	//     var panorama = new google.maps.StreetViewPanorama(
-	//       document.getElementById(elementId), panoOptions)
-
-	//       function getCustomPanoramaTileUrl(pano, zoom, tileX, tileY) {
-	//         return $scope.imageURL;
-	//       }
-
-	//       function getCustomPanorama(pano, zoom, tileX, tileY) {
-	//         if (pano == 'custom') {
-	//           return {
-	//             location: {
-	//               pano: 'custom',
-	//               description: 'Custom Street View'
-	//             },
-	//             tiles: {
-	//               tileSize: new google.maps.Size( 5656 ,  2828 ),
-	//               worldSize: new google.maps.Size( 5656 ,  2828 ),
-	//               getTileUrl: getCustomPanoramaTileUrl
-	//             }
-	//           };
-	//         }
-	//     }
-	// }
 }]);

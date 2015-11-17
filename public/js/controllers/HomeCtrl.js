@@ -33,13 +33,8 @@ app.controller('HomeCtrl', ["$mdDialog", "$location","$rootScope", "$scope", "$h
 	}
 
 	$scope.userRemoveComment = function(obj){
-		console.log("trying to delete");
-		console.log(obj);
-		$scope.comments.$remove(obj).then(function(ref){
-			var boot = "boot";
-			console.log(boot);
+			$scope.comments.$remove(obj).then(function(ref){
 			ref.key() === obj.$id; // true
-			console.log("deleted?");
 		})
 	}
 
