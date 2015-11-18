@@ -31,4 +31,8 @@ app.config(function($routeProvider,$locationProvider, $sceDelegateProvider) {
 		templateUrl: 'views/detail.html',
 		controller: 'DetailCtrl'
 	})
+	.when('/styleguide', {
+		templateUrl: 'views/styleGuide.html',
+		controller: 'DetailCtrl'
+	})
 });

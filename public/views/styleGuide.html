@@ -1,11 +1,4 @@
-<!-- STANDARD BUTTONS  -->
-    <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-      <md-button>{{title1}}</md-button>
-      <md-button md-no-ink class="md-primary">Primary (md-noink)</md-button>
-      <md-button ng-disabled="true" class="md-primary">Disabled</md-button>
-      <md-button class="md-warn">{{title4}}</md-button>
-      <div class="label">Flat</div>
-    </section>
+
 
 <!-- ICON BUTTONS with tooltips -->
   <md-content>
@@ -31,32 +24,37 @@
     </md-toolbar>
   </md-content>
 
+<!-- STANDARD BUTTONS  -->
+    <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+      <md-button md-no-ink class="md-primary">Primary Button</md-button>
+      <md-button ng-disabled="true" class="md-primary">Disabled</md-button>
+      <md-button style="color: #D50F25;" ng-href="account">Google+</md-button>
+      <md-button style="color: #3b5998;" ng-href="account">facebook</md-button>
+      <md-button style="color: #55acee;" ng-href="account">twitter</md-button>
+    </section>
+
 <!-- CARD CONTENT -->
 	<md-card>
 	  <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
 	  <md-card-content>
-	    <h2 class="md-title">Paracosm</h2>
-	    <p>
-	      The titles of Washed Out's breakthrough song and the first single from Paracosm share the
-	      two most important words in Ernest Greene's musical language: feel it. It's a simple request, as well...
-	    </p>
+	    <h2 class="md-title">Style Guide</h2>
+  <!-- USER INPUTS -->
+    <form ng-submit="">
+        <div layout="" layout-sm="column">
+        <md-input-container flex="" >
+          <label>Enter a comment</label>
+          <textarea ></textarea>
+        </md-input-container>
+      </div>
+    </form>
 	  </md-card-content>
 	  <md-card-actions layout="row" layout-align="end center">
-	    <md-button>Action 1</md-button>
-	    <md-button>Action 2</md-button>
+	    <md-button>Submit</md-button>
 	  </md-card-actions>
 	</md-card>
 
 
-<!-- USER INPUTS -->
-	<form ng-submit="">
-	   	<div layout="" layout-sm="column">
-			<md-input-container flex="" >
-			  <label>Enter a comment</label>
-			  <textarea >New Comment</textarea>
-			</md-input-container>
-		</div>
-	</form>
+
 
 
 <!-- MODAL -->
@@ -76,7 +74,7 @@
 
 		<md-input-container flex="">
 			<label>Current Comment</label>
-      <textarea ng-model="editComment.body" columns="1" md-maxlength="150"></textarea>
+      <textarea ng-model="" columns="1" md-maxlength="150"></textarea>
 		</md-input-container>
 
     </div>
@@ -93,10 +91,10 @@
 
 <!-- CSS, FONTS, SHORTCUT ICON & BRAND COLORS -->
 <link rel="shortcut icon" href="http://iconshow.me/media/images/Mixed/line-icon/png/512/camera-512.png">
-      <link href='https://fonts.googleapis.com/css?family=Asap' rel='stylesheet' type='text/css'>
-      <link href='https://fonts.googleapis.com/css?family=Raleway:400,100,200,700' rel='stylesheet' type='text/css'>
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <link rel="stylesheet" href="/bower/angular-material/angular-material.css">
-      <link href="css/main.css" rel="stylesheet">
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
-      <meta name="theme-color" content="#3F51B5">
+<link href='https://fonts.googleapis.com/css?family=Asap' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Raleway:400,100,200,700' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="/bower/angular-material/angular-material.css">
+<link href="css/main.css" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+<meta name="theme-color" content="#3F51B5">
