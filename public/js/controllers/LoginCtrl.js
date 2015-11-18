@@ -28,10 +28,11 @@ $scope.imagePath = 'imgs/photosphere.jpg';
 			  	user.userName = authData.facebook.displayName;
 			  	user.$save();	
 		  	}
-		} else {
-		  	//if user not logged in
-		  	$location.path('/');
 		}
+		//  else {
+		//   	//if user not logged in
+		//   	$location.path('/');
+		// }
 	}
 
 	$scope.login = function(){

@@ -3,7 +3,7 @@
 <!-- ICON BUTTONS with tooltips -->
   <md-content>
    <md-toolbar>
-    <div class="md-toolbar-tools">
+        <div class="md-toolbar-tools">
       <md-button class="md-icon-button" aria-label="home" ng-href="/">
         <md-icon class="material-icons">home</md-icon>
         <md-tooltip>Home</md-tooltip>
@@ -20,6 +20,10 @@
         <a ng-href="/" ng-click="logout()"><md-icon class="material-icons">exit_to_app</md-icon></a>
         <md-tooltip>Log Out</md-tooltip>
       </md-button>
+      <md-button class="md-icon-button" >
+        <a ng-href="/styleguide"><md-icon class="material-icons">style</md-icon></a>
+        <md-tooltip>Style Guide</md-tooltip>
+      </md-button>
     </div>
     </md-toolbar>
   </md-content>
@@ -28,14 +32,14 @@
     <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
       <md-button md-no-ink class="md-primary">Primary Button</md-button>
       <md-button ng-disabled="true" class="md-primary">Disabled</md-button>
-      <md-button style="color: #D50F25;" ng-href="account">Google+</md-button>
-      <md-button style="color: #3b5998;" ng-href="account">facebook</md-button>
-      <md-button style="color: #55acee;" ng-href="account">twitter</md-button>
+      <md-button style="color: #D50F25;">Google+</md-button>
+      <md-button style="color: #3b5998;">facebook</md-button>
+      <md-button style="color: #55acee;">twitter</md-button>
     </section>
 
 <!-- CARD CONTENT -->
 	<md-card>
-	  <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
+	  <img ng-src="http://i.imgur.com/WLq3FuN.jpg" class="md-card-image">
 	  <md-card-content>
 	    <h2 class="md-title">Style Guide</h2>
   <!-- USER INPUTS -->
