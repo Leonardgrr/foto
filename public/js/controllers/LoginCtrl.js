@@ -37,9 +37,6 @@ $scope.imagePath = 'imgs/photosphere.jpg';
 
 	$scope.login = function(){
 		$scope.authObj.$authWithOAuthPopup("google").then(function(authData) {
-		  // console.log("Logged in as:", authData.uid);
-		  // console.log(authData);
-		  // console.log(authData.google.profileImageURL);
 		  $scope.userData = authData;
 		}).catch(function(error) {
 		  console.error("Authentication failed:", error);
@@ -49,9 +46,6 @@ $scope.imagePath = 'imgs/photosphere.jpg';
 	$scope.loginFacebook = function(){
 		console.log("facebook login dialog is here")
 		$scope.authObj.$authWithOAuthPopup("facebook").then(function(authData) {
-		  // console.log("Logged in as:", authData.uid);
-		  // console.log(authData.facebook.displayName);
-		  // console.log(authData.facebook.profileImageURL);
 		  $scope.userData = authData;
 		}).catch(function(error) {
 		  console.error("Authentication failed:", error);
@@ -84,10 +78,6 @@ $scope.imagePath = 'imgs/photosphere.jpg';
 		  	// for use to use with current user crud ie: edit/delete user comments
 		  	$rootScope.currentUser = $scope.userData.uid;
 		  	$rootScope.currentUserDataAll = $scope.userData;
-		  	// $rootScope.currentUser1 = $scope.userData.uid;
-		  	// console.log("current user is ", $scope.currentUser);
-		  	// console.log($scope.currentUserDataAll);
-		  	// console.log("current user is ", $rootScope.currentUser1);
 		} 
 	});
 

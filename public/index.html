@@ -10,63 +10,14 @@
       <link rel="stylesheet" href="/bower/angular-material/angular-material.css">
       <link href="css/main.css" rel="stylesheet">
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
-      <meta name="theme-color" content="#3F51B5">
+      <meta name="theme-color" content="#009688">
       <meta name="viewport" content="width=device-width">
-      <title>foto</title>
-      <script src="sha256.js"></script>
+      <title>PanoramaGram</title>
     </head>
     <body layout="column">
-
-    <!-- MAIN TOOLBAR -->
-<!--       <div ng-cloak>
-        <md-content>
-         <md-toolbar>
-          <div class="md-toolbar-tools">
-            <md-button class="md-icon-button" aria-label="home" ng-href="/">
-              <md-icon class="material-icons">home</md-icon>
-            </md-button>
-            <h2>
-              <span>AVA</span>
-            </h2>
-            <span flex></span>
-            <md-button class="md-icon-button" aria-label="Favorite">
-              <a ng-href="explore" ng-href="explore"><md-icon class="material-icons">explore</md-icon></a>
-            </md-button>
-            <md-button class="md-icon-button" aria-label="Sign In" ng-click="showAdvanced($event, user, $index)">
-              <a ng-href="account"><md-icon class="material-icons" >account_circle</md-icon></a>
-            </md-button>
-          </div>
-          </md-toolbar>
-        </md-content>  -->
-        <!-- END MAIN TOOLBAR -->
-
-        <!-- FAB TOOLBAR -->
-<!--         <md-fab-toolbar md-open="demo.isOpen" md-direction="left" >
-          <md-fab-trigger class="align-with-text">
-            <md-button aria-label="add" class="md-fab md-primary">
-              <md-icon class="material-icons">add</md-icon>
-              <md-tooltip>More</md-tooltip>
-            </md-button>
-          </md-fab-trigger>
-          <md-toolbar>
-            <md-fab-actions class="md-toolbar-tools">
-              <md-button aria-label="comment" class="md-icon-button">
-                <md-icon  class="material-icons">comment</md-icon>
-              </md-button>
-              <md-button aria-label="label" class="md-icon-button">
-                <md-icon  class="material-icons">label</md-icon>
-              </md-button>
-              <md-button aria-label="photo" class="md-icon-button">
-                <md-icon  class="material-icons">photo</md-icon>
-              </md-button>
-            </md-fab-actions>
-          </md-toolbar>
-        </md-fab-toolbar>  -->
-        <!-- END FAB TOOLBAR -->
-
         <!-- NG VIEW IS RIGHT HERE! -->
        
-          <ng-view></ng-view>
+        <ng-view></ng-view>
       
 
       <!-- angular and firebase stuff -->
@@ -87,17 +38,6 @@
       <script src="js/controllers/LoginCtrl.js"></script>
       <script src="js/controllers/DetailCtrl.js"></script>
       <script src="js/controllers/MaterialCtrl.js"></script>
-
-
-    <!-- GOOGLE MAPS API KEY -->
-    <!-- <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCS49t-uAb_YZkcbJlu77HrAwWjDfsMYFo&signed_in=true&callback=initPano"
-        async defer>
-    </script> -->
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCS49t-uAb_YZkcbJlu77HrAwWjDfsMYFo&signed_in=true"
-        async defer>
-    </script>
 
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>

@@ -16,7 +16,7 @@ app.controller('DetailCtrl', ["$mdDialog", "$location","$rootScope", "$scope", "
 	  	$scope.imageURL =  data.picture;
 	  	// $scope.imageURL = $sce.trustAsResourceUrl(data.picture);
 	  	// $scope.imageURL = $sceDelegateProvider.resourceUrlWhitelist(data.picture);
-	  	console.log("this is", $scope.imageId);
+	  	// console.log("this is", $scope.imageId);
 	})
 	  .catch(function(error) {
 	    console.error("Error:", error);

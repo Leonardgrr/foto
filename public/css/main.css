@@ -3,6 +3,11 @@ h1,h2,h3,h4{
 	font-weight: 300;
 }
 
+.title{
+  font-family: 'Raleway', sans-serif;
+  font-weight: 300;
+}
+
 body{
 	font-family: 'Roboto', sans-serif;
 	font-weight: 400;
@@ -46,4 +51,9 @@ pre {
 .pano {
   height: 85%;
   max-height: 85%;
+}
+
+
+.panocard{
+  max-width: 325px;
 }
